@@ -16,6 +16,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three/webgpu'
 import useViewer from '../../store/use-viewer'
 import { GuideSystem } from '../../systems/guide/guide-system'
+import { ItemHtmlPreviewSystem } from '../../systems/item-html-preview/item-html-preview-system'
 import { ItemLightSystem } from '../../systems/item-light/item-light-system'
 import { LevelSystem } from '../../systems/level/level-system'
 import { ScanSystem } from '../../systems/scan/scan-system'
@@ -151,6 +152,7 @@ const Viewer: React.FC<ViewerProps> = ({
       <GPUDeviceWatcher />
 
       <ItemLightSystem />
+      <ItemHtmlPreviewSystem />
       {selectionManager === 'default' && <SelectionManager />}
       {perf && <PerfMonitor />}
       {children}

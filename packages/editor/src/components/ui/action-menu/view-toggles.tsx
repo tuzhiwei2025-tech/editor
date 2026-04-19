@@ -88,7 +88,7 @@ function UploadButton() {
   return (
     <>
       <button
-        aria-label="Upload scan or guide image"
+        aria-label="上传扫描或参考图"
         className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border/40 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
         onClick={() => fileInputRef.current?.click()}
         type="button"
@@ -136,14 +136,14 @@ function GuidesControl() {
               ? 'bg-white/15'
               : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0',
           )}
-          label={`Guides: ${showGuides ? 'Visible' : 'Hidden'}`}
+          label={`参考图：${showGuides ? '显示' : '隐藏'}`}
           onClick={() => setShowGuides(!showGuides)}
           size="icon"
           variant="ghost"
         >
           <div className="relative">
             <img
-              alt="Guides"
+              alt="参考图"
               className="h-[28px] w-[28px] object-contain"
               src="/icons/floorplan.png"
             />
@@ -157,7 +157,7 @@ function GuidesControl() {
         <PopoverTrigger asChild>
           <button
             aria-expanded={isOpen}
-            aria-label="Guide image settings"
+            aria-label="参考图设置"
             className={cn(
               'flex h-11 w-6 items-center justify-center rounded-r-lg transition-colors',
               showGuides
@@ -187,10 +187,10 @@ function GuidesControl() {
               <img alt="" className="h-4 w-4 object-contain" src="/icons/floorplan.png" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-foreground text-sm">Guide images</p>
+              <p className="font-medium text-foreground text-sm">参考图</p>
               {hasGuides && (
                 <p className="text-muted-foreground text-xs">
-                  {guides.length} guide image{guides.length !== 1 ? 's' : ''} on this level
+                  本层共 {guides.length} 张参考图
                 </p>
               )}
             </div>
@@ -211,10 +211,10 @@ function GuidesControl() {
                       src="/icons/floorplan.png"
                     />
                     <p className="truncate font-medium text-foreground text-sm">
-                      {guide.name || `Guide image ${index + 1}`}
+                      {guide.name || `参考图 ${index + 1}`}
                     </p>
                     <button
-                      aria-label="Delete guide image"
+                      aria-label="删除参考图"
                       className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground/50 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover/item:opacity-100"
                       onClick={() => deleteNode(guide.id)}
                       type="button"
@@ -223,7 +223,7 @@ function GuidesControl() {
                     </button>
                   </div>
                   <SliderControl
-                    label="Opacity"
+                    label="不透明度"
                     max={100}
                     min={0}
                     onChange={(value) => handleOpacityChange(guide.id, value)}
@@ -237,7 +237,7 @@ function GuidesControl() {
             </div>
           ) : (
             <div className="rounded-xl border border-border/45 border-dashed bg-background/60 px-3 py-4 text-muted-foreground text-sm">
-              No guide images on this level yet.
+              本层尚无参考图。
             </div>
           )}
         </div>
@@ -276,13 +276,13 @@ function ScansControl() {
               ? 'bg-white/15'
               : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0',
           )}
-          label={`Scans: ${showScans ? 'Visible' : 'Hidden'}`}
+          label={`扫描：${showScans ? '显示' : '隐藏'}`}
           onClick={() => setShowScans(!showScans)}
           size="icon"
           variant="ghost"
         >
           <div className="relative">
-            <img alt="Scans" className="h-[28px] w-[28px] object-contain" src="/icons/mesh.png" />
+            <img alt="扫描" className="h-[28px] w-[28px] object-contain" src="/icons/mesh.png" />
             <span className="absolute -right-1.5 -bottom-1 min-w-[14px] rounded-full bg-white/20 px-[3px] text-center font-medium text-[9px] text-white/70 leading-[14px]">
               {scans.length}
             </span>
@@ -293,7 +293,7 @@ function ScansControl() {
         <PopoverTrigger asChild>
           <button
             aria-expanded={isOpen}
-            aria-label="Scan settings"
+            aria-label="扫描设置"
             className={cn(
               'flex h-11 w-6 items-center justify-center rounded-r-lg transition-colors',
               showScans
@@ -323,10 +323,10 @@ function ScansControl() {
               <img alt="" className="h-4 w-4 object-contain" src="/icons/mesh.png" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-foreground text-sm">Scans</p>
+              <p className="font-medium text-foreground text-sm">扫描</p>
               {hasScans && (
                 <p className="text-muted-foreground text-xs">
-                  {scans.length} scan{scans.length !== 1 ? 's' : ''} on this level
+                  本层共 {scans.length} 个扫描
                 </p>
               )}
             </div>
@@ -347,10 +347,10 @@ function ScansControl() {
                       src="/icons/mesh.png"
                     />
                     <p className="truncate font-medium text-foreground text-sm">
-                      {scan.name || `Scan ${index + 1}`}
+                      {scan.name || `扫描 ${index + 1}`}
                     </p>
                     <button
-                      aria-label="Delete scan"
+                      aria-label="删除扫描"
                       className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground/50 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover/item:opacity-100"
                       onClick={() => deleteNode(scan.id)}
                       type="button"
@@ -359,7 +359,7 @@ function ScansControl() {
                     </button>
                   </div>
                   <SliderControl
-                    label="Opacity"
+                    label="不透明度"
                     max={100}
                     min={0}
                     onChange={(value) => handleOpacityChange(scan.id, value)}
@@ -373,7 +373,7 @@ function ScansControl() {
             </div>
           ) : (
             <div className="rounded-xl border border-border/45 border-dashed bg-background/60 px-3 py-4 text-muted-foreground text-sm">
-              No scans on this level yet.
+              本层尚无扫描。
             </div>
           )}
         </div>

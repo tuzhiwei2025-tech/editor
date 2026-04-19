@@ -28,6 +28,7 @@ import {
   writePersistedSelection,
 } from '../../lib/scene'
 import { initSFXBus } from '../../lib/sfx-bus'
+import type { TeamRuntimeScript } from '../../lib/team-workflow'
 import useEditor from '../../store/use-editor'
 import { CeilingSystem } from '../systems/ceiling/ceiling-system'
 import { RoofEditSystem } from '../systems/roof/roof-edit-system'
@@ -52,8 +53,10 @@ import { SettingsPanel, type SettingsPanelProps } from '../ui/sidebar/panels/set
 import { SitePanel, type SitePanelProps } from '../ui/sidebar/panels/site-panel'
 import type { SidebarTab } from '../ui/sidebar/tab-bar'
 import { CustomCameraControls } from './custom-camera-controls'
+import { DemoPackAmbient } from './demo-pack-ambient'
 import { EditorLayoutV2 } from './editor-layout-v2'
 import { ExportManager } from './export-manager'
+import { FirstPersonControls, FirstPersonOverlay } from './first-person-controls'
 import { FloatingActionMenu } from './floating-action-menu'
 import { FloatingBuildingActionMenu } from './floating-building-action-menu'
 import { FloorplanPanel } from './floorplan-panel'
@@ -63,7 +66,6 @@ import { SelectionManager } from './selection-manager'
 import { SiteEdgeLabels } from './site-edge-labels'
 import { ThumbnailGenerator } from './thumbnail-generator'
 import { WallMeasurementLabel } from './wall-measurement-label'
-import { FirstPersonControls, FirstPersonOverlay } from './first-person-controls'
 
 const CAMERA_CONTROLS_HINT_DISMISSED_STORAGE_KEY = 'editor-camera-controls-hint-dismissed:v1'
 const DELETE_CURSOR_BADGE_COLOR = '#ef4444'
@@ -139,15 +141,18 @@ export interface EditorProps {
 
   // Command palette fallback when no commands match
   commandPaletteEmptyAction?: CommandPaletteEmptyAction
+
+  /** 数字办公 demo：按脚本驱动工位与产线（来自工作流页 sessionStorage 等） */
+  teamRuntimeScript?: TeamRuntimeScript | null
 }
 
 function EditorSceneCrashFallback() {
   return (
     <div className="fixed inset-0 z-80 flex items-center justify-center bg-background/95 p-4 text-foreground">
       <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background p-6 shadow-xl">
-        <h2 className="font-semibold text-lg">The editor scene failed to render</h2>
+        <h2 className="font-semibold text-lg">编辑器场景无法渲染</h2>
         <p className="mt-2 text-muted-foreground text-sm">
-          You can retry the scene or return home without reloading the whole app shell.
+          您可以重试场景或返回首页，而无需刷新整个应用外壳。
         </p>
         <div className="mt-4 flex items-center gap-2">
           <button
@@ -155,13 +160,13 @@ function EditorSceneCrashFallback() {
             onClick={() => window.location.reload()}
             type="button"
           >
-            Reload editor
+            重新加载编辑器
           </button>
           <a
             className="rounded-md border border-border bg-background px-3 py-2 font-medium text-sm hover:bg-accent/40"
             href="/"
           >
-            Back to home
+            返回首页
           </a>
         </div>
       </div>
@@ -243,7 +248,7 @@ function SidebarSlot({ children }: { children: ReactNode }) {
           <div
             className="absolute inset-0 z-10 cursor-col-resize transition-colors hover:bg-primary/20"
             onPointerDown={handleGrabDown}
-            title="Expand sidebar"
+            title="展开侧栏"
           />
         ) : (
           children
@@ -531,6 +536,7 @@ export default function Editor({
   extraSidebarPanels,
   presetsAdapter,
   commandPaletteEmptyAction,
+  teamRuntimeScript,
 }: EditorProps) {
   useKeyboard({ isVersionPreviewMode })
 
@@ -684,7 +690,12 @@ export default function Editor({
       <CeilingSystem />
       <RoofEditSystem />
       <StairEditSystem />
-      {!isLoading && !isFirstPersonMode && <Grid cellColor="#aaa" fadeDistance={500} sectionColor="#ccc" />}
+      {!isLoading && !isFirstPersonMode && (
+        <Grid cellColor="#aaa" fadeDistance={500} sectionColor="#ccc" />
+      )}
+      {!isLoading && !isVersionPreviewMode && (
+        <DemoPackAmbient teamRuntimeScript={teamRuntimeScript ?? null} />
+      )}
       {!(isLoading || isVersionPreviewMode) && !isFirstPersonMode && <ToolManager />}
       {isFirstPersonMode && <FirstPersonControls />}
       <CustomCameraControls />
@@ -696,16 +707,23 @@ export default function Editor({
   )
 
   const previewViewerContent = (
-    <Viewer selectionManager="default">
+    <Viewer selectionManager={isFirstPersonMode ? 'default' : 'custom'}>
       <ExportManager />
-      <ViewerZoneSystem />
+      {isFirstPersonMode ? <ViewerZoneSystem /> : <ZoneSystem />}
       <CeilingSystem />
       <RoofEditSystem />
       <StairEditSystem />
+      {!isLoading && !isFirstPersonMode && (
+        <Grid cellColor="#aaa" fadeDistance={500} sectionColor="#ccc" />
+      )}
+      {!isLoading && !isVersionPreviewMode && (
+        <DemoPackAmbient teamRuntimeScript={teamRuntimeScript ?? null} />
+      )}
+      {isFirstPersonMode && <FirstPersonControls />}
       <CustomCameraControls />
       <ThumbnailGenerator onThumbnailCapture={onThumbnailCapture} />
       <PresetThumbnailGenerator />
-      <InteractiveSystem />
+      {isFirstPersonMode && <InteractiveSystem />}
     </Viewer>
   )
 
@@ -784,7 +802,9 @@ export default function Editor({
             />
           ) : null}
           <SelectionPersistenceManager enabled={hasLoadedInitialScene && !showLoader} />
-          <Viewer selectionManager={isFirstPersonMode ? 'default' : 'custom'}>{viewerSceneContent}</Viewer>
+          <Viewer selectionManager={isFirstPersonMode ? 'default' : 'custom'}>
+            {viewerSceneContent}
+          </Viewer>
         </div>
       </div>
       {!(isLoading || isVersionPreviewMode) && <ZoneLabelEditorSystem />}
@@ -822,8 +842,18 @@ export default function Editor({
 
         {!isLoading && isPreviewMode ? (
           <div className="dark flex h-full w-full flex-col bg-neutral-100 text-foreground">
-            <ViewerOverlay onBack={() => useEditor.getState().setPreviewMode(false)} />
+            {!isFirstPersonMode ? (
+              <ViewerOverlay
+                onBack={() => useEditor.getState().setPreviewMode(false)}
+                showWalkthroughEntry
+              />
+            ) : null}
             <div className="h-full w-full">{previewViewerContent}</div>
+            {isFirstPersonMode ? (
+              <div className="pointer-events-none fixed inset-0 z-50">
+                <FirstPersonOverlay onExit={() => useEditor.getState().setFirstPersonMode(false)} />
+              </div>
+            ) : null}
           </div>
         ) : (
           <>
@@ -858,9 +888,7 @@ export default function Editor({
             {/* First-person overlay — rendered on top of normal layout */}
             {isFirstPersonMode && (
               <div className="fixed inset-0 z-50 pointer-events-none">
-                <FirstPersonOverlay
-                  onExit={() => useEditor.getState().setFirstPersonMode(false)}
-                />
+                <FirstPersonOverlay onExit={() => useEditor.getState().setFirstPersonMode(false)} />
               </div>
             )}
             <EditorCommands />
@@ -888,8 +916,18 @@ export default function Editor({
 
         {!isLoading && isPreviewMode ? (
           <>
-            <ViewerOverlay onBack={() => useEditor.getState().setPreviewMode(false)} />
+            {!isFirstPersonMode ? (
+              <ViewerOverlay
+                onBack={() => useEditor.getState().setPreviewMode(false)}
+                showWalkthroughEntry
+              />
+            ) : null}
             <div className="h-full w-full">{previewViewerContent}</div>
+            {isFirstPersonMode ? (
+              <div className="pointer-events-none fixed inset-0 z-50">
+                <FirstPersonOverlay onExit={() => useEditor.getState().setFirstPersonMode(false)} />
+              </div>
+            ) : null}
           </>
         ) : (
           <>

@@ -134,7 +134,7 @@ export function FeedbackDialog({
         setSent(true)
         setTimeout(() => setOpen(false), 1500)
       } else {
-        setError(result.error ?? 'Something went wrong')
+        setError(result.error ?? '出错了')
       }
     } finally {
       setIsSubmitting(false)
@@ -148,7 +148,7 @@ export function FeedbackDialog({
         onClick={handleOpen}
       >
         <MessageSquare className="h-4 w-4" />
-        Feedback
+        反馈
       </button>
 
       <Dialog onOpenChange={handleClose} open={open}>
@@ -164,25 +164,25 @@ export function FeedbackDialog({
             <div className="absolute inset-0 z-50 flex items-center justify-center rounded-lg border-2 border-primary/50 border-dashed bg-primary/5 backdrop-blur-sm transition-all">
               <div className="flex flex-col items-center gap-2 text-primary/70">
                 <ImageIcon className="h-8 w-8" />
-                <p className="font-medium text-sm">Drop images here</p>
+                <p className="font-medium text-sm">将图片拖放到此处</p>
               </div>
             </div>
           )}
 
           <DialogHeader>
-            <DialogTitle>Send Feedback</DialogTitle>
-            <DialogDescription>We&apos;d love to hear your thoughts</DialogDescription>
+            <DialogTitle>发送反馈</DialogTitle>
+            <DialogDescription>我们很乐意听取您的意见</DialogDescription>
           </DialogHeader>
 
           {sent ? (
             <p className="py-4 text-center text-muted-foreground text-sm">
-              Thanks for your feedback!
+              感谢您的反馈！
             </p>
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="font-medium text-sm" htmlFor="feedback-message">
-                  Your feedback
+                  您的反馈
                 </label>
                 <textarea
                   autoFocus
@@ -190,7 +190,7 @@ export function FeedbackDialog({
                   disabled={isSubmitting}
                   id="feedback-message"
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Share your thoughts, suggestions, feature requests, or report issues..."
+                  placeholder="请分享想法、建议、功能需求或报告问题…"
                   rows={5}
                   value={message}
                 />
@@ -228,7 +228,7 @@ export function FeedbackDialog({
                   type="button"
                 >
                   <ImageIcon className="h-3.5 w-3.5" />
-                  {images.length > 0 ? `${images.length}/${MAX_IMAGES}` : 'Attach'}
+                  {images.length > 0 ? `${images.length}/${MAX_IMAGES}` : '添加图片'}
                 </button>
                 <input
                   accept="image/*"
@@ -249,10 +249,10 @@ export function FeedbackDialog({
                     type="button"
                     variant="outline"
                   >
-                    Cancel
+                    取消
                   </Button>
                   <Button disabled={isSubmitting || !message.trim() || !onSubmit} type="submit">
-                    {isSubmitting ? 'Sending...' : 'Send Feedback'}
+                    {isSubmitting ? '发送中…' : '发送反馈'}
                   </Button>
                 </div>
               </div>

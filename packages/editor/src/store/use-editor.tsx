@@ -446,7 +446,7 @@ const useEditor = create<EditorState>()(
           // Clear zone/item selection for clean viewer drill-down hierarchy
           useViewer.getState().setSelection({ selectedIds: [], zoneId: null })
         } else {
-          set({ isPreviewMode: false })
+          set({ isPreviewMode: false, isFirstPersonMode: false })
         }
       },
       viewMode: DEFAULT_PERSISTED_EDITOR_UI_STATE.viewMode,

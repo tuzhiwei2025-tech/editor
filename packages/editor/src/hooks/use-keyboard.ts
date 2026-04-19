@@ -18,6 +18,13 @@ export const useKeyboard = ({ isVersionPreviewMode = false } = {}) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
         return
       }
+      if (e.target instanceof HTMLElement && e.target.isContentEditable) {
+        return
+      }
+
+      if (useEditor.getState().isFirstPersonMode) {
+        return
+      }
 
       if (e.key === 'Escape') {
         // If in walkthrough mode, let WalkthroughControls handle ESC

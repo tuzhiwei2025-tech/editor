@@ -162,7 +162,7 @@ export function PresetsPopover({
           <div className="flex items-center gap-1.5">
             <BookMarked className="h-3.5 w-3.5 text-muted-foreground" />
             <span className="font-semibold text-foreground text-xs tracking-tight">
-              {type === 'door' ? 'Door' : 'Window'} Presets
+              {type === 'door' ? '门' : '窗'}预设
             </span>
           </div>
           {isAuthenticated && (
@@ -175,7 +175,7 @@ export function PresetsPopover({
               type="button"
             >
               <Plus className="h-3 w-3" />
-              Save new
+              新建预设
             </button>
           )}
         </div>
@@ -193,7 +193,7 @@ export function PresetsPopover({
                   setSaveName('')
                 }
               }}
-              placeholder="Preset name…"
+              placeholder="预设名称…"
               value={saveName}
             />
             <button
@@ -222,7 +222,7 @@ export function PresetsPopover({
             {tabs.includes('community') && (
               <TabButton active={tab === 'community'} onClick={() => setTab('community')}>
                 <Users className="h-3 w-3" />
-                Community
+                社区
               </TabButton>
             )}
             {tabs.includes('mine') && (
@@ -234,7 +234,7 @@ export function PresetsPopover({
                 }}
               >
                 <BookMarked className="h-3 w-3" />
-                My presets
+                我的预设
               </TabButton>
             )}
           </div>
@@ -320,10 +320,10 @@ function EmptyState({ tab, isAuthenticated }: { tab: PresetsTab; isAuthenticated
       <BookMarked className="h-6 w-6 text-muted-foreground/40" />
       <p className="text-muted-foreground text-xs">
         {tab === 'community'
-          ? 'No community presets yet.'
+          ? '暂无社区预设。'
           : isAuthenticated
-            ? 'No presets saved yet. Use "Save new" to save the current configuration.'
-            : 'Sign in to save and view your presets.'}
+            ? '尚未保存预设。点击「新建预设」可保存当前配置。'
+            : '登录后可保存并查看您的预设。'}
       </p>
     </div>
   )
@@ -375,21 +375,21 @@ function PresetRow({
   if (isDeleting) {
     return (
       <li className="flex items-center justify-between gap-2 bg-red-500/10 px-3 py-2.5">
-        <span className="truncate text-foreground/80 text-xs">Delete "{preset.name}"?</span>
+        <span className="truncate text-foreground/80 text-xs">删除「{preset.name}」？</span>
         <div className="flex shrink-0 items-center gap-1">
           <button
             className="rounded-md bg-red-500/20 px-2 py-0.5 font-medium text-[11px] text-red-400 transition-colors hover:bg-red-500/30"
             onClick={onDeleteConfirm}
             type="button"
           >
-            Delete
+            删除
           </button>
           <button
             className="rounded-md px-2 py-0.5 font-medium text-[11px] text-muted-foreground transition-colors hover:bg-white/10"
             onClick={onDeleteCancel}
             type="button"
           >
-            Cancel
+            取消
           </button>
         </div>
       </li>
@@ -478,30 +478,30 @@ function PresetRow({
           <DropdownMenuContent align="start" className="min-w-44" side="left">
             <DropdownMenuItem onClick={onOverwrite}>
               <Save className="h-3.5 w-3.5" />
-              Update with current
+              用当前配置覆盖
             </DropdownMenuItem>
             {showCommunityToggle && (
               <DropdownMenuItem onClick={onToggleCommunity}>
                 {preset.is_community ? (
                   <>
                     <GlobeLock className="h-3.5 w-3.5" />
-                    Remove from community
+                    从社区移除
                   </>
                 ) : (
                   <>
                     <Globe className="h-3.5 w-3.5" />
-                    Share with community
+                    分享到社区
                   </>
                 )}
               </DropdownMenuItem>
             )}
             <DropdownMenuItem onClick={onStartRename}>
               <Pencil className="h-3.5 w-3.5" />
-              Rename
+              重命名
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onDeleteRequest} variant="destructive">
               <Trash2 className="h-3.5 w-3.5" />
-              Delete
+              删除
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

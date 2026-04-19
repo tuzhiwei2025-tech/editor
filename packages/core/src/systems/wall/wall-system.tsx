@@ -116,7 +116,7 @@ function updateWallGeometry(wallId: string, miterData: WallMiterData) {
 
   const childrenIds = node.children || []
   const childrenNodes = childrenIds
-    .map((childId) => nodes[childId])
+    .map((childId) => nodes[childId as AnyNodeId])
     .filter((n): n is AnyNode => n !== undefined)
 
   const newGeo = generateExtrudedWall(node, childrenNodes, miterData, slabElevation)

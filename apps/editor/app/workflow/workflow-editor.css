@@ -1,0 +1,493 @@
+/* 工作流画布：液态毛玻璃 + Apple 系深色配色（作用域在 .workflow-app） */
+
+.workflow-app {
+  --wf-bg-deep: #050508;
+  --wf-bg-mid: #0c0c12;
+  --wf-surface: rgba(32, 32, 38, 0.52);
+  --wf-glass: rgba(255, 255, 255, 0.07);
+  --wf-glass-strong: rgba(255, 255, 255, 0.14);
+  --wf-glass-inner: rgba(255, 255, 255, 0.04);
+  --wf-border: rgba(255, 255, 255, 0.14);
+  --wf-border-soft: rgba(255, 255, 255, 0.09);
+  --wf-text: #f5f5f7;
+  --wf-text-dim: #a1a1a6;
+  --wf-accent: #0a84ff;
+  --wf-accent-soft: rgba(10, 132, 255, 0.35);
+  --wf-mint: #30d158;
+  --wf-mint-soft: rgba(48, 209, 88, 0.3);
+  --wf-violet: #bf5af2;
+  --wf-violet-soft: rgba(191, 90, 242, 0.35);
+  --wf-amber: #ffd60a;
+  --wf-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --wf-blur: blur(22px) saturate(1.65);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Text',
+    'Segoe UI',
+    system-ui,
+    sans-serif;
+}
+
+.workflow-app__aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 55% at 18% 12%, rgba(10, 132, 255, 0.22), transparent 52%),
+    radial-gradient(ellipse 70% 50% at 88% 8%, rgba(191, 90, 242, 0.18), transparent 48%),
+    radial-gradient(ellipse 60% 45% at 52% 92%, rgba(48, 209, 88, 0.12), transparent 50%),
+    linear-gradient(165deg, var(--wf-bg-deep) 0%, var(--wf-bg-mid) 45%, #06060a 100%);
+}
+
+.workflow-app__aurora::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.workflow-app__panel {
+  background: var(--wf-surface);
+  -webkit-backdrop-filter: var(--wf-blur);
+  backdrop-filter: var(--wf-blur);
+  border-color: var(--wf-border-soft);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.workflow-app__btn {
+  transition:
+    transform 280ms var(--wf-ease),
+    box-shadow 280ms var(--wf-ease),
+    background-color 280ms var(--wf-ease),
+    border-color 280ms var(--wf-ease);
+}
+
+.workflow-app__btn:hover {
+  transform: translateY(-1px);
+}
+
+.workflow-app__btn--primary {
+  background: linear-gradient(180deg, #2b8fff 0%, var(--wf-accent) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 6px 20px var(--wf-accent-soft);
+}
+
+.workflow-app__btn--primary:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 10px 28px rgba(10, 132, 255, 0.45);
+}
+
+/* —— 节点卡片（液态玻璃 + 渐变描边动画） —— */
+.wf-node {
+  position: relative;
+  min-width: 120px;
+  cursor: grab;
+  border-radius: 22px;
+  padding: 0.95rem 1.1rem;
+  color: var(--wf-text);
+  border: 1px solid var(--wf-border);
+  background:
+    radial-gradient(120% 90% at 10% -20%, rgba(255, 255, 255, 0.12), transparent 42%),
+    linear-gradient(165deg, var(--wf-glass-strong) 0%, var(--wf-glass) 48%, rgba(0, 0, 0, 0.12) 100%);
+  -webkit-backdrop-filter: var(--wf-blur);
+  backdrop-filter: var(--wf-blur);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.2) inset,
+    0 14px 44px rgba(0, 0, 0, 0.42);
+  transition:
+    transform 380ms var(--wf-ease),
+    box-shadow 380ms var(--wf-ease),
+    border-color 380ms var(--wf-ease);
+  overflow: hidden;
+}
+
+.wf-node:active {
+  cursor: grabbing;
+}
+
+.wf-node::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    115deg,
+    rgba(90, 200, 250, 0.5),
+    rgba(124, 140, 255, 0.38),
+    rgba(192, 132, 252, 0.5),
+    rgba(90, 200, 250, 0.5)
+  );
+  background-size: 240% 240%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.62;
+  animation: wf-node-border-flow 10s linear infinite;
+  pointer-events: none;
+}
+
+.wf-node--start::before {
+  background: linear-gradient(
+    118deg,
+    rgba(125, 211, 252, 0.65),
+    rgba(56, 189, 248, 0.35),
+    rgba(125, 211, 252, 0.65)
+  );
+  background-size: 240% 240%;
+  opacity: 0.7;
+}
+
+.wf-node--end::before {
+  background: linear-gradient(
+    118deg,
+    rgba(216, 180, 254, 0.65),
+    rgba(167, 139, 250, 0.38),
+    rgba(244, 114, 182, 0.45)
+  );
+  background-size: 240% 240%;
+  opacity: 0.68;
+}
+
+.wf-node--employee::before {
+  background: linear-gradient(
+    118deg,
+    rgba(253, 224, 71, 0.35),
+    rgba(251, 191, 36, 0.42),
+    rgba(253, 224, 71, 0.35)
+  );
+  background-size: 240% 240%;
+  opacity: 0.55;
+}
+
+.wf-node::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(10, 132, 255, 0);
+  pointer-events: none;
+  transition: box-shadow 380ms var(--wf-ease);
+}
+
+.wf-node:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 18px 48px rgba(0, 0, 0, 0.42);
+}
+
+.wf-node--selected::after {
+  box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.55), 0 0 28px var(--wf-accent-soft);
+}
+
+.wf-node__inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 14px;
+  padding: 0.05rem 0;
+}
+
+.wf-node-gogo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.wf-node-gogo-ico {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset;
+}
+
+.wf-node-gogo-ico--start {
+  background: linear-gradient(160deg, rgba(125, 211, 252, 0.22), rgba(56, 189, 248, 0.08));
+  border-color: rgba(125, 211, 252, 0.35);
+  color: #e0f2fe;
+}
+
+.wf-node-gogo-ico--end {
+  background: linear-gradient(160deg, rgba(216, 180, 254, 0.24), rgba(167, 139, 250, 0.1));
+  border-color: rgba(216, 180, 254, 0.38);
+  color: #f5e8ff;
+}
+
+.wf-node--gogo {
+  min-width: 168px;
+}
+
+.wf-node--start {
+  border-color: rgba(90, 200, 250, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(90, 200, 250, 0.15);
+}
+
+.wf-node--end {
+  border-color: rgba(191, 90, 242, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 24px var(--wf-violet-soft);
+}
+
+.wf-node--employee {
+  min-width: 216px;
+  max-width: 300px;
+  border-color: rgba(255, 214, 10, 0.26);
+}
+
+.wf-node--employee:hover {
+  border-color: rgba(255, 214, 10, 0.35);
+}
+
+.wf-node-title {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+}
+
+.wf-node-sub {
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  color: var(--wf-text-dim);
+  line-height: 1.35;
+}
+
+.wf-node-label {
+  font-weight: 500;
+  font-size: 0.6875rem;
+  color: rgba(255, 214, 10, 0.88);
+}
+
+.wf-node-value {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: var(--wf-text);
+}
+
+.wf-node-value--emp-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.wf-node-role {
+  font-weight: 500;
+  color: var(--wf-text-dim);
+}
+
+.wf-tool-chip-row {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.wf-tool-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.65rem;
+  padding: 0.12rem 0.38rem;
+  border-radius: 8px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: color-mix(in srgb, var(--wf-chip, #0a84ff) 82%, #000 18%);
+  border: 1px solid color-mix(in srgb, var(--wf-chip, #0a84ff) 55%, transparent);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.wf-tool-chip--with-icon {
+  min-width: 1.85rem;
+  padding: 0.22rem 0.42rem;
+  border-radius: 10px;
+}
+
+.wf-tool-chip__ico {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.wf-tool-chip--large {
+  min-width: 2.25rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.625rem;
+  border-radius: 10px;
+}
+
+.wf-tool-chip--empty {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--wf-text-dim);
+  font-weight: 500;
+}
+
+.wf-member-card {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+.wf-tool-toggle:has(input:checked) {
+  border-color: rgba(10, 132, 255, 0.45);
+  background: rgba(10, 132, 255, 0.1);
+}
+
+.wf-node-accent-start {
+  color: #7dd3fc;
+}
+
+.wf-node-accent-end {
+  color: #d8b4fe;
+}
+
+/* Handles */
+.wf-handle {
+  width: 10px !important;
+  height: 10px !important;
+  border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  transition:
+    transform 220ms var(--wf-ease),
+    box-shadow 220ms var(--wf-ease);
+}
+
+.wf-handle--src {
+  background: rgba(125, 211, 252, 0.95) !important;
+}
+
+.wf-handle--tgt {
+  background: rgba(209, 213, 219, 0.95) !important;
+}
+
+.wf-node:hover .wf-handle {
+  transform: scale(1.12);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+}
+
+/* Edges */
+.workflow-app .react-flow__edge-path {
+  stroke: url(#wfEdgeGrad);
+  stroke-width: 2.25px;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(10, 132, 255, 0.35));
+}
+
+.workflow-app .react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 6 4;
+  animation: wf-edge-flow 520ms linear infinite;
+}
+
+.workflow-app .react-flow__connectionline {
+  stroke: rgba(10, 132, 255, 0.65);
+  stroke-width: 2px;
+  stroke-dasharray: 4 4;
+  animation: wf-edge-flow 400ms linear infinite;
+}
+
+.workflow-app .react-flow__controls {
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(24, 24, 30, 0.52);
+  -webkit-backdrop-filter: blur(22px) saturate(1.65);
+  backdrop-filter: blur(22px) saturate(1.65);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.workflow-app .react-flow__controls-button {
+  width: 38px !important;
+  height: 38px !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  fill: rgba(245, 245, 247, 0.92) !important;
+  transition: background-color 200ms var(--wf-ease);
+}
+
+.workflow-app .react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.workflow-app .react-flow__controls-button:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.workflow-app .react-flow__controls-button svg {
+  max-width: 14px;
+  max-height: 14px;
+}
+
+/* 整理排列浮层 */
+.wf-tidy-panel {
+  min-width: 8.5rem;
+}
+
+.wf-tidy-panel__btn:first-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.125rem;
+  padding-bottom: 0.35rem;
+}
+
+.workflow-app .react-flow__background pattern circle {
+  fill: rgba(255, 255, 255, 0.06) !important;
+}
+
+@keyframes wf-node-border-flow {
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes wf-edge-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-node::before,
+  .workflow-app .react-flow__edge.animated .react-flow__edge-path {
+    animation: none;
+  }
+
+  .wf-node:hover {
+    transform: none;
+  }
+
+  .wf-node::before {
+    opacity: 0.35;
+  }
+}

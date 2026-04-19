@@ -67,7 +67,7 @@ export function TreeNodeActions({ node }: TreeNodeActionsProps) {
           <button
             className="relative flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-black/5 hover:text-foreground dark:hover:bg-white/10"
             onClick={(e) => e.stopPropagation()}
-            title="Camera snapshot"
+            title="相机快照"
           >
             <Camera className="h-3 w-3" />
             {hasCamera && (

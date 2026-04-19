@@ -1,4 +1,4 @@
-import { useRegistry, useScene, type WallNode } from '@pascal-app/core'
+import { type AnyNode, useRegistry, useScene, type WallNode } from '@pascal-app/core'
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import type { Mesh } from 'three'
 import { useNodeEvents } from '../../../hooks/use-node-events'
@@ -30,7 +30,7 @@ export const WallRenderer = ({ node }: { node: WallNode }) => {
       </mesh>
 
       {node.children.map((childId) => (
-        <NodeRenderer key={childId} nodeId={childId} />
+        <NodeRenderer key={childId} nodeId={childId as AnyNode['id']} />
       ))}
     </mesh>
   )

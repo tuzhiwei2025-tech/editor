@@ -22,6 +22,7 @@ const DEBUG_MAX_POLAR_ANGLE = Math.PI - 0.05
 export const CustomCameraControls = () => {
   const controls = useRef<CameraControlsImpl>(null!)
   const isPreviewMode = useEditor((s) => s.isPreviewMode)
+  const isFirstPersonMode = useEditor((s) => s.isFirstPersonMode)
   const walkthroughMode = useViewer((s) => s.walkthroughMode)
   const allowUndergroundCamera = useEditor((s) => s.allowUndergroundCamera)
   const selection = useViewer((s) => s.selection)
@@ -367,6 +368,11 @@ export const CustomCameraControls = () => {
 
   if (walkthroughMode) {
     return <WalkthroughControls />
+  }
+
+  // Orbit controls fight with FirstPersonControls (both drive the same camera).
+  if (isFirstPersonMode) {
+    return null
   }
 
   return (

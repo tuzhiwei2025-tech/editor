@@ -153,11 +153,11 @@ function OptionItem({
 // Sub-page label map
 // ---------------------------------------------------------------------------
 const PAGE_LABEL: Record<string, string> = {
-  'wall-mode': 'Wall Mode',
-  'level-mode': 'Level Mode',
-  'rename-level': 'Rename Level',
-  'goto-level': 'Go to Level',
-  'camera-view': 'Camera Snapshot',
+  'wall-mode': '墙体显示模式',
+  'level-mode': '楼层显示模式',
+  'rename-level': '重命名楼层',
+  'goto-level': '前往楼层',
+  'camera-view': '相机快照',
   'camera-scope': '',
 }
 
@@ -269,15 +269,15 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
   }
 
   const wallModeLabel: Record<'cutaway' | 'up' | 'down', string> = {
-    cutaway: 'Cutaway',
-    up: 'Up',
-    down: 'Down',
+    cutaway: '剖切',
+    up: '全高',
+    down: '低矮',
   }
   const levelModeLabel: Record<'manual' | 'stacked' | 'exploded' | 'solo', string> = {
-    manual: 'Manual',
-    stacked: 'Stacked',
-    exploded: 'Exploded',
-    solo: 'Solo',
+    manual: '手动',
+    stacked: '堆叠',
+    exploded: '分解',
+    solo: '单层',
   }
 
   // Camera snapshot helpers (used by sub-pages registered via EditorCommands)
@@ -340,7 +340,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogContent className="max-w-lg gap-0 overflow-hidden p-0" showCloseButton={false}>
-        <DialogTitle className="sr-only">Command Palette</DialogTitle>
+        <DialogTitle className="sr-only">命令面板</DialogTitle>
 
         {modeView && <modeView.Component onBack={onBack} onClose={onClose} />}
 
@@ -365,7 +365,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                   type="button"
                 >
                   {page === 'camera-scope'
-                    ? (cameraScope?.label ?? 'Snapshot')
+                    ? (cameraScope?.label ?? '快照')
                     : (PAGE_LABEL[page] ?? views.get(page)?.label ?? page)}
                 </button>
               )}
@@ -375,10 +375,10 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                 onValueChange={setInputValue}
                 placeholder={
                   page === 'rename-level'
-                    ? 'Type a new name…'
+                    ? '输入新名称…'
                     : page
-                      ? 'Filter options…'
-                      : 'Search actions…'
+                      ? '筛选选项…'
+                      : '搜索操作…'
                 }
                 value={inputValue}
               />
@@ -387,7 +387,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
             <Command.List className="max-h-100 overflow-y-auto p-1.5">
               {(!emptyAction || page) && (
                 <Command.Empty className="py-8 text-center text-muted-foreground text-sm">
-                  No commands found.
+                  未找到命令。
                 </Command.Empty>
               )}
               {emptyAction && !page && <EmptyActionItem action={emptyAction} />}
@@ -422,7 +422,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
 
               {/* ── Wall Mode sub-page ────────────────────────────────────── */}
               {page === 'wall-mode' && (
-                <Command.Group heading="Wall Mode">
+                <Command.Group heading="墙体显示模式">
                   {(['cutaway', 'up', 'down'] as const).map((mode) => (
                     <OptionItem
                       isActive={wallMode === mode}
@@ -436,7 +436,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
 
               {/* ── Level Mode sub-page ───────────────────────────────────── */}
               {page === 'level-mode' && (
-                <Command.Group heading="Level Mode">
+                <Command.Group heading="楼层显示模式">
                   {(['stacked', 'exploded', 'solo'] as const).map((mode) => (
                     <OptionItem
                       isActive={levelMode === mode}
@@ -450,12 +450,12 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
 
               {/* ── Go to Level sub-page ──────────────────────────────────── */}
               {page === 'goto-level' && (
-                <Command.Group heading="Go to Level">
+                <Command.Group heading="前往楼层">
                   {allLevels.map((level) => (
                     <OptionItem
                       isActive={level.id === activeLevelId}
                       key={level.id}
-                      label={level.name ?? `Level ${level.level}`}
+                      label={level.name ?? `第 ${level.level} 层`}
                       onSelect={() =>
                         run(() => useViewer.getState().setSelection({ levelId: level.id }))
                       }
@@ -466,7 +466,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
 
               {/* ── Rename Level sub-page ─────────────────────────────────── */}
               {page === 'rename-level' && (
-                <Command.Group heading="Rename Level">
+                <Command.Group heading="重命名楼层">
                   <Command.Item
                     className="flex cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-foreground text-sm transition-colors data-[disabled=true]:cursor-not-allowed data-[selected=true]:bg-accent data-[disabled=true]:opacity-40"
                     disabled={!inputValue.trim()}
@@ -492,10 +492,10 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                     <span className="flex-1 truncate">
                       {inputValue.trim() ? (
                         <>
-                          Rename to <span className="font-medium">"{inputValue.trim()}"</span>
+                          重命名为 <span className="font-medium">"{inputValue.trim()}"</span>
                         </>
                       ) : (
-                        <span className="text-muted-foreground">Type a new name above…</span>
+                        <span className="text-muted-foreground">在上方输入新名称…</span>
                       )}
                     </span>
                   </Command.Item>
@@ -504,7 +504,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
 
               {/* ── Camera Snapshot: scope picker ─────────────────────────── */}
               {page === 'camera-view' && (
-                <Command.Group heading="Camera Snapshot — Select Scope">
+                <Command.Group heading="相机快照 — 选择范围">
                   <OptionItem
                     icon={
                       <svg
@@ -518,12 +518,12 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                         <path d="M3 9h18M9 21V9" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     }
-                    label="Site"
+                    label="场地"
                     onSelect={() => {
                       const { rootNodeIds } = useScene.getState()
                       const siteId = rootNodeIds[0]
                       if (siteId) {
-                        setCameraScope({ nodeId: siteId, label: 'Site' })
+                        setCameraScope({ nodeId: siteId, label: '场地' })
                         navigateTo('camera-scope')
                       }
                     }}
@@ -549,13 +549,13 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                         />
                       </svg>
                     }
-                    label="Building"
+                    label="建筑"
                     onSelect={() => {
                       const building = Object.values(useScene.getState().nodes).find(
                         (n) => n.type === 'building',
                       )
                       if (building) {
-                        setCameraScope({ nodeId: building.id, label: 'Building' })
+                        setCameraScope({ nodeId: building.id, label: '建筑' })
                         navigateTo('camera-scope')
                       }
                     }}
@@ -582,10 +582,10 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                         />
                       </svg>
                     }
-                    label="Level"
+                    label="楼层"
                     onSelect={() => {
                       if (activeLevelId) {
-                        setCameraScope({ nodeId: activeLevelId, label: 'Level' })
+                        setCameraScope({ nodeId: activeLevelId, label: '楼层' })
                         navigateTo('camera-scope')
                       }
                     }}
@@ -603,11 +603,11 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                         <path d="M5 3l14 9-14 9V3z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     }
-                    label="Selection"
+                    label="选中项"
                     onSelect={() => {
                       const firstId = useViewer.getState().selection.selectedIds[0]
                       if (firstId) {
-                        setCameraScope({ nodeId: firstId, label: 'Selection' })
+                        setCameraScope({ nodeId: firstId, label: '选中项' })
                         navigateTo('camera-scope')
                       }
                     }}
@@ -617,7 +617,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
 
               {/* ── Camera Snapshot: actions for selected scope ───────────── */}
               {page === 'camera-scope' && cameraScope && (
-                <Command.Group heading={`${cameraScope.label} Snapshot`}>
+                <Command.Group heading={`${cameraScope.label} 快照`}>
                   <OptionItem
                     icon={
                       <svg
@@ -641,7 +641,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                         />
                       </svg>
                     }
-                    label={hasScopeSnapshot ? 'Update Snapshot' : 'Take Snapshot'}
+                    label={hasScopeSnapshot ? '更新快照' : '拍摄快照'}
                     onSelect={takeSnapshot}
                   />
                   {hasScopeSnapshot && (
@@ -668,7 +668,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                           />
                         </svg>
                       }
-                      label="View Snapshot"
+                      label="查看快照"
                       onSelect={viewSnapshot}
                     />
                   )}
@@ -696,7 +696,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
                           <path d="M9 6V4h6v2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       }
-                      label="Clear Snapshot"
+                      label="清除快照"
                       onSelect={clearSnapshot}
                     />
                   )}
@@ -707,18 +707,18 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
             {/* Footer hint */}
             <div className="flex items-center justify-between border-border/50 border-t px-3 py-2">
               <span className="text-[11px] text-muted-foreground">
-                <Shortcut keys={['↑', '↓']} /> navigate
+                <Shortcut keys={['↑', '↓']} /> 移动
               </span>
               <span className="text-[11px] text-muted-foreground">
-                <Shortcut keys={['↵']} /> select
+                <Shortcut keys={['↵']} /> 选择
               </span>
               {page ? (
                 <span className="text-[11px] text-muted-foreground">
-                  <Shortcut keys={['⌫']} /> back
+                  <Shortcut keys={['⌫']} /> 返回
                 </span>
               ) : (
                 <span className="text-[11px] text-muted-foreground">
-                  <Shortcut keys={['Esc']} /> close
+                  <Shortcut keys={['Esc']} /> 关闭
                 </span>
               )}
             </div>

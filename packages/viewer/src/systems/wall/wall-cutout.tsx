@@ -1,13 +1,14 @@
 import {
   type AnyNodeId,
   baseMaterial,
+  resolveMaterial,
   sceneRegistry,
   useScene,
   type WallNode,
 } from '@pascal-app/core'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
-import { Color } from 'three'
+import { Color, DoubleSide, FrontSide } from 'three'
 import { Fn, float, fract, length, mix, positionLocal, smoothstep, step, vec2 } from 'three/tsl'
 import { type Mesh, MeshStandardNodeMaterial, Vector3 } from 'three/webgpu'
 import useViewer from '../../store/use-viewer'
@@ -60,32 +61,10 @@ interface WallMaterials {
 
 const wallMaterialCache = new Map<string, WallMaterials>()
 
-const presetColors = {
-  white: '#ffffff',
-  brick: '#8b4513',
-  concrete: '#808080',
-  wood: '#deb887',
-  glass: '#87ceeb',
-  metal: '#c0c0c0',
-  plaster: '#f5f5dc',
-  tile: '#dcdcdc',
-  marble: '#f5f5f5',
-} as const
-
 function getMaterialHash(wallNode: WallNode): string {
   if (!wallNode.material) return 'none'
-  const mat = wallNode.material
-  if (mat.preset && mat.preset !== 'custom') {
-    return `preset-${mat.preset}`
-  }
-  if (mat.properties) {
-    return `props-${mat.properties.color}-${mat.properties.roughness}-${mat.properties.metalness}`
-  }
-  return 'default'
-}
-
-function getPresetColor(preset: string): string {
-  return presetColors[preset as keyof typeof presetColors] ?? '#ffffff'
+  const p = resolveMaterial(wallNode.material)
+  return `${p.color}-${p.opacity}-${p.transparent}-${p.roughness}-${p.metalness}-${p.side}`
 }
 
 function getHighlightedColor(color: string, kind: WallHighlightKind): Color {
@@ -127,18 +106,18 @@ function getMaterialsForWall(wallNode: WallNode): WallMaterials {
     existing.highlightedInvisible.dispose()
   }
 
-  let userColor = DEFAULT_WALL_COLOR
-  if (wallNode.material?.properties?.color) {
-    userColor = wallNode.material.properties.color
-  } else if (wallNode.material?.preset && wallNode.material.preset !== 'custom') {
-    userColor = getPresetColor(wallNode.material.preset)
-  }
+  const resolved = wallNode.material ? resolveMaterial(wallNode.material) : null
+  const userColor = resolved?.color ?? DEFAULT_WALL_COLOR
 
-  const visibleMat = wallNode.material
+  const visibleMat = resolved
     ? new MeshStandardNodeMaterial({
         color: userColor,
-        roughness: 1,
-        metalness: 0,
+        roughness: resolved.roughness,
+        metalness: resolved.metalness,
+        opacity: resolved.opacity,
+        transparent: resolved.transparent,
+        depthWrite: !resolved.transparent,
+        side: resolved.side === 'double' ? DoubleSide : FrontSide,
       })
     : (baseMaterial.clone() as MeshStandardNodeMaterial)
 

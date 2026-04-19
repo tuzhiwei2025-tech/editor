@@ -23,13 +23,13 @@ interface IconRailProps {
 const sitePanel: { id: PanelId; iconSrc: string; label: string } = {
   id: 'site',
   iconSrc: '/icons/level.png',
-  label: 'Site',
+  label: '场地',
 }
 
 const settingsPanel: { id: PanelId; iconSrc: string; label: string } = {
   id: 'settings',
   iconSrc: '/icons/settings.png',
-  label: 'Settings',
+  label: '设置',
 }
 
 const panels: { id: PanelId; iconSrc: string; label: string }[] = [sitePanel, settingsPanel]

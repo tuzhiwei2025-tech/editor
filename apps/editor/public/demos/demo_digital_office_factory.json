@@ -1,0 +1,4145 @@
+{
+  "nodes": {
+    "building_dof_demo": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "demoPack": "digital-office-factory"
+      },
+      "id": "building_dof_demo",
+      "type": "building",
+      "parentId": null,
+      "children": [
+        "level_dof_demo"
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "level_dof_demo": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "level_dof_demo",
+      "type": "level",
+      "parentId": "building_dof_demo",
+      "children": [
+        "slab_dof_demo",
+        "zone_dof_office",
+        "zone_dof_meeting",
+        "zone_dof_line_a",
+        "zone_dof_line_b",
+        "wall_dof_s",
+        "wall_dof_e",
+        "wall_dof_n",
+        "wall_dof_w",
+        "wall_dof_div",
+        "wall_dof_meeting_div",
+        "item_dof_1",
+        "item_dof_2",
+        "item_dof_3",
+        "item_dof_4",
+        "item_dof_5",
+        "item_dof_6",
+        "item_dof_7",
+        "item_dof_8",
+        "item_dof_9",
+        "item_dof_a",
+        "item_dof_b",
+        "item_dof_c",
+        "item_dof_d",
+        "item_dof_e",
+        "item_dof_f",
+        "item_dof_g",
+        "item_dof_h",
+        "item_dof_i",
+        "item_dof_j",
+        "item_dof_k",
+        "item_dof_l",
+        "item_dof_m",
+        "item_dof_n",
+        "item_dof_o",
+        "item_dof_p",
+        "item_dof_q",
+        "item_dof_r",
+        "item_dof_s",
+        "item_dof_t",
+        "item_dof_u",
+        "item_dof_v",
+        "item_dof_w",
+        "item_dof_x",
+        "item_dof_y",
+        "item_dof_z",
+        "item_dof_10",
+        "item_dof_11",
+        "item_dof_12",
+        "item_dof_13",
+        "item_dof_14",
+        "item_dof_15",
+        "item_dof_16",
+        "item_dof_17",
+        "item_dof_18",
+        "item_dof_19",
+        "item_dof_1a",
+        "item_dof_1b",
+        "item_dof_1c",
+        "item_dof_1d",
+        "item_dof_1e",
+        "item_dof_1f",
+        "item_dof_1g",
+        "item_dof_1h",
+        "item_dof_1i",
+        "item_dof_1j",
+        "item_dof_1k",
+        "item_dof_1l",
+        "item_dof_1m",
+        "item_dof_1n",
+        "item_dof_1o",
+        "item_dof_1p",
+        "item_dof_1q",
+        "item_dof_1r",
+        "item_dof_1s",
+        "item_dof_1t",
+        "item_dof_1u",
+        "item_dof_1v",
+        "item_dof_1w"
+      ],
+      "level": 0,
+      "camera": {
+        "position": [
+          26,
+          20,
+          18
+        ],
+        "target": [
+          9,
+          0,
+          5
+        ],
+        "mode": "perspective"
+      }
+    },
+    "slab_dof_demo": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "slab_dof_demo",
+      "type": "slab",
+      "name": "联合厂房地面",
+      "parentId": "level_dof_demo",
+      "polygon": [
+        [
+          -4,
+          -4
+        ],
+        [
+          42,
+          -4
+        ],
+        [
+          42,
+          17
+        ],
+        [
+          -4,
+          17
+        ]
+      ],
+      "elevation": 0.05,
+      "material": {
+        "preset": "tile",
+        "properties": {
+          "color": "#dbeafe",
+          "roughness": 0.55,
+          "metalness": 0.04,
+          "opacity": 1,
+          "transparent": false,
+          "side": "front"
+        }
+      }
+    },
+    "door_dof_meeting": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "door_dof_meeting",
+      "type": "door",
+      "parentId": "wall_dof_meeting_div",
+      "wallId": "wall_dof_meeting_div",
+      "children": [],
+      "position": [
+        3.796,
+        1.075,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "side": "front",
+      "width": 1.35,
+      "height": 2.15,
+      "frameThickness": 0.05,
+      "frameDepth": 0.07,
+      "threshold": true,
+      "thresholdHeight": 0.02,
+      "hingesSide": "left",
+      "swingDirection": "inward",
+      "segments": [
+        {
+          "type": "panel",
+          "heightRatio": 0.4,
+          "columnRatios": [
+            1
+          ],
+          "dividerThickness": 0.03,
+          "panelDepth": 0.01,
+          "panelInset": 0.04
+        },
+        {
+          "type": "glass",
+          "heightRatio": 0.6,
+          "columnRatios": [
+            1
+          ],
+          "dividerThickness": 0.03,
+          "panelDepth": 0.01,
+          "panelInset": 0.04
+        }
+      ],
+      "handle": true,
+      "handleHeight": 1.05,
+      "handleSide": "right",
+      "contentPadding": [
+        0.04,
+        0.04
+      ],
+      "doorCloser": false,
+      "panicBar": false,
+      "panicBarHeight": 1
+    },
+    "door_dof_factory": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "door_dof_factory",
+      "type": "door",
+      "parentId": "wall_dof_div",
+      "wallId": "wall_dof_div",
+      "children": [],
+      "position": [
+        10.08,
+        1.075,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "side": "front",
+      "width": 1.35,
+      "height": 2.15,
+      "frameThickness": 0.05,
+      "frameDepth": 0.07,
+      "threshold": true,
+      "thresholdHeight": 0.02,
+      "hingesSide": "left",
+      "swingDirection": "inward",
+      "segments": [
+        {
+          "type": "panel",
+          "heightRatio": 0.4,
+          "columnRatios": [
+            1
+          ],
+          "dividerThickness": 0.03,
+          "panelDepth": 0.01,
+          "panelInset": 0.04
+        },
+        {
+          "type": "glass",
+          "heightRatio": 0.6,
+          "columnRatios": [
+            1
+          ],
+          "dividerThickness": 0.03,
+          "panelDepth": 0.01,
+          "panelInset": 0.04
+        }
+      ],
+      "handle": true,
+      "handleHeight": 1.05,
+      "handleSide": "right",
+      "contentPadding": [
+        0.04,
+        0.04
+      ],
+      "doorCloser": false,
+      "panicBar": false,
+      "panicBarHeight": 1
+    },
+    "wall_dof_s": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "wall_dof_s",
+      "type": "wall",
+      "parentId": "level_dof_demo",
+      "children": [],
+      "start": [
+        -4,
+        -4
+      ],
+      "end": [
+        42,
+        -4
+      ]
+    },
+    "wall_dof_e": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "wall_dof_e",
+      "type": "wall",
+      "parentId": "level_dof_demo",
+      "children": [],
+      "start": [
+        42,
+        -4
+      ],
+      "end": [
+        42,
+        17
+      ]
+    },
+    "wall_dof_n": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "wall_dof_n",
+      "type": "wall",
+      "parentId": "level_dof_demo",
+      "children": [],
+      "start": [
+        42,
+        17
+      ],
+      "end": [
+        -4,
+        17
+      ]
+    },
+    "wall_dof_w": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "wall_dof_w",
+      "type": "wall",
+      "parentId": "level_dof_demo",
+      "children": [],
+      "start": [
+        -4,
+        17
+      ],
+      "end": [
+        -4,
+        -4
+      ]
+    },
+    "wall_dof_div": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "wall_dof_div",
+      "type": "wall",
+      "parentId": "level_dof_demo",
+      "children": [
+        "door_dof_factory"
+      ],
+      "start": [
+        17,
+        -4
+      ],
+      "end": [
+        17,
+        17
+      ],
+      "thickness": 0.1,
+      "material": {
+        "preset": "glass",
+        "properties": {
+          "color": "#cfe8fc",
+          "roughness": 0.08,
+          "metalness": 0.12,
+          "opacity": 0.24,
+          "transparent": true,
+          "side": "double"
+        }
+      }
+    },
+    "wall_dof_meeting_div": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "wall_dof_meeting_div",
+      "type": "wall",
+      "parentId": "level_dof_demo",
+      "children": [
+        "door_dof_meeting"
+      ],
+      "start": [
+        5.45,
+        9.45
+      ],
+      "end": [
+        12.75,
+        9.45
+      ],
+      "thickness": 0.1,
+      "material": {
+        "preset": "glass",
+        "properties": {
+          "color": "#cfe8fc",
+          "roughness": 0.08,
+          "metalness": 0.12,
+          "opacity": 0.24,
+          "transparent": true,
+          "side": "double"
+        }
+      }
+    },
+    "zone_dof_office": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "zone_dof_office",
+      "type": "zone",
+      "name": "开放办公 · 8 工位",
+      "parentId": "level_dof_demo",
+      "polygon": [
+        [
+          -4,
+          -4
+        ],
+        [
+          16.8,
+          -4
+        ],
+        [
+          16.8,
+          17
+        ],
+        [
+          -4,
+          17
+        ]
+      ],
+      "color": "#5ac8fa"
+    },
+    "zone_dof_meeting": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "zone_dof_meeting",
+      "type": "zone",
+      "name": "会议室",
+      "parentId": "level_dof_demo",
+      "polygon": [
+        [
+          5.46,
+          9.46
+        ],
+        [
+          12.74,
+          9.46
+        ],
+        [
+          12.74,
+          17
+        ],
+        [
+          5.46,
+          17
+        ]
+      ],
+      "color": "#bf5af2"
+    },
+    "zone_dof_line_a": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "zone_dof_line_a",
+      "type": "zone",
+      "name": "流水线 · A 段",
+      "parentId": "level_dof_demo",
+      "polygon": [
+        [
+          17,
+          -4
+        ],
+        [
+          42,
+          -4
+        ],
+        [
+          42,
+          5.5
+        ],
+        [
+          17,
+          5.5
+        ]
+      ],
+      "color": "#636366"
+    },
+    "zone_dof_line_b": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "zone_dof_line_b",
+      "type": "zone",
+      "name": "流水线 · B 段",
+      "parentId": "level_dof_demo",
+      "polygon": [
+        [
+          17,
+          5.5
+        ],
+        [
+          42,
+          5.5
+        ],
+        [
+          42,
+          17
+        ],
+        [
+          17,
+          17
+        ]
+      ],
+      "color": "#636366"
+    },
+    "item_dof_1": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        1,
+        0,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_2": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_2",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        1,
+        0,
+        2.75
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_3": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 0,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 1</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_3",
+      "type": "item",
+      "name": "工位 1 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        0.65,
+        0.75,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_4": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_4",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        4.5,
+        0,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_5": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_5",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        4.5,
+        0,
+        2.75
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_6": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 1,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 2</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_6",
+      "type": "item",
+      "name": "工位 2 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        4.15,
+        0.75,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_7": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_7",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        8,
+        0,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_8": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_8",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        8,
+        0,
+        2.75
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_9": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 2,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 3</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_9",
+      "type": "item",
+      "name": "工位 3 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        7.65,
+        0.75,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_a": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_a",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.5,
+        0,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_b": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_b",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.5,
+        0,
+        2.75
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_c": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 3,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 4</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_c",
+      "type": "item",
+      "name": "工位 4 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.15,
+        0.75,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_d": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_d",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        1,
+        0,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_e": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_e",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        1,
+        0,
+        6.550000000000001
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_f": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 4,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 5</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_f",
+      "type": "item",
+      "name": "工位 5 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        0.65,
+        0.75,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_g": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_g",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        4.5,
+        0,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_h": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_h",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        4.5,
+        0,
+        6.550000000000001
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_i": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 5,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 6</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_i",
+      "type": "item",
+      "name": "工位 6 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        4.15,
+        0.75,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_j": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_j",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        8,
+        0,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_k": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_k",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        8,
+        0,
+        6.550000000000001
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_l": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 6,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 7</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_l",
+      "type": "item",
+      "name": "工位 7 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        7.65,
+        0.75,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_m": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_m",
+      "type": "item",
+      "name": "办公桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.5,
+        0,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-table",
+        "category": "furniture",
+        "name": "Office Table",
+        "thumbnail": "/items/office-table/thumbnail.webp",
+        "src": "/items/office-table/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_n": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_n",
+      "type": "item",
+      "name": "办公椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.5,
+        0,
+        6.550000000000001
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "office-chair",
+        "category": "furniture",
+        "name": "Office Chair",
+        "thumbnail": "/items/office-chair/thumbnail.webp",
+        "src": "/items/office-chair/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0.01,
+          0,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_o": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "desk-employee",
+        "deskSlotIndex": 7,
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">工位 8</span>\n  <h1>待命</h1><p class=\"hint\">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_o",
+      "type": "item",
+      "name": "工位 8 · 屏幕",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.15,
+        0.75,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_p": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "team-result",
+        "htmlPreview": {
+          "variant": "wall",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;\n  background:linear-gradient(155deg,rgba(8,47,73,0.22),rgba(15,23,42,0.28) 50%,rgba(30,41,59,0.2));\n  backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);\n  color:#f0f9ff;font-family:system-ui,sans-serif}\n  .box{max-width:92%;text-align:center;padding:22px 30px;border-radius:16px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  h1{margin:0 0 10px;font-size:clamp(16px,2.5vw,22px);letter-spacing:0.02em}\n  p{margin:0;font-size:12px;opacity:0.9;line-height:1.55}\n  code{font-size:10px;background:rgba(15,23,42,0.35);padding:2px 6px;border-radius:4px;border:1px solid rgba(148,163,184,0.22)}\n  </style></head><body><div class=\"box\"><h1>信息发布大屏 · HTML</h1><p><code>metadata.htmlPreview</code></p></div></body></html>",
+          "sizePx": [
+            320,
+            180
+          ],
+          "distanceFactor": 6,
+          "flipContentX": true
+        }
+      },
+      "id": "item_dof_p",
+      "type": "item",
+      "name": "信息发布大屏",
+      "parentId": "level_dof_demo",
+      "position": [
+        8,
+        0,
+        -3.35
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1.88,
+        1.88,
+        1.88
+      ],
+      "asset": {
+        "id": "television",
+        "category": "appliance",
+        "name": "Television",
+        "thumbnail": "/items/television/thumbnail.webp",
+        "src": "/items/television/model.glb",
+        "dimensions": [
+          2,
+          1.1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_q": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_q",
+      "type": "item",
+      "name": "休闲沙发",
+      "parentId": "level_dof_demo",
+      "position": [
+        7.35,
+        0,
+        6.95
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "sofa",
+        "category": "furniture",
+        "name": "Sofa",
+        "thumbnail": "/items/sofa/thumbnail.webp",
+        "src": "/items/sofa/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_r": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_r",
+      "type": "item",
+      "name": "接待茶几",
+      "parentId": "level_dof_demo",
+      "position": [
+        7.35,
+        0,
+        4.12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "coffee-table",
+        "category": "furniture",
+        "name": "Coffee Table",
+        "thumbnail": "/items/coffee-table/thumbnail.webp",
+        "src": "/items/coffee-table/model.glb",
+        "dimensions": [
+          2,
+          0.4,
+          1.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.3
+        }
+      }
+    },
+    "item_dof_s": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_s",
+      "type": "item",
+      "name": "边凳",
+      "parentId": "level_dof_demo",
+      "position": [
+        10.05,
+        0,
+        4.18
+      ],
+      "rotation": [
+        0,
+        -0.25,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "stool",
+        "category": "furniture",
+        "name": "Stool",
+        "thumbnail": "/items/stool/thumbnail.webp",
+        "src": "/items/stool/model.glb",
+        "dimensions": [
+          1,
+          1.2,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_t": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_t",
+      "type": "item",
+      "name": "入口绿植",
+      "parentId": "level_dof_demo",
+      "position": [
+        1.5,
+        0.02,
+        -3.12
+      ],
+      "rotation": [
+        0,
+        0.28,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "indoor-plant",
+        "category": "furniture",
+        "name": "Indoor Plant",
+        "thumbnail": "/items/indoor-plant/thumbnail.webp",
+        "src": "/items/indoor-plant/model.glb",
+        "dimensions": [
+          1,
+          1.5,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_u": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_u",
+      "type": "item",
+      "name": "工区绿植",
+      "parentId": "level_dof_demo",
+      "position": [
+        5.35,
+        0.02,
+        6.25
+      ],
+      "rotation": [
+        0,
+        0.12,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "small-indoor-plant",
+        "category": "furniture",
+        "name": "Small Indoor Plant",
+        "thumbnail": "/items/small-indoor-plant/thumbnail.webp",
+        "src": "/items/small-indoor-plant/model.glb",
+        "dimensions": [
+          0.5,
+          0.6,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_v": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_v",
+      "type": "item",
+      "name": "工区绿植",
+      "parentId": "level_dof_demo",
+      "position": [
+        3.55,
+        0.02,
+        4.05
+      ],
+      "rotation": [
+        0,
+        -0.15,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "small-indoor-plant",
+        "category": "furniture",
+        "name": "Small Indoor Plant",
+        "thumbnail": "/items/small-indoor-plant/thumbnail.webp",
+        "src": "/items/small-indoor-plant/model.glb",
+        "dimensions": [
+          0.5,
+          0.6,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_w": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_w",
+      "type": "item",
+      "name": "画架白板",
+      "parentId": "level_dof_demo",
+      "position": [
+        0.95,
+        0,
+        6.35
+      ],
+      "rotation": [
+        0,
+        0.55,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "easel",
+        "category": "furniture",
+        "name": "Easel",
+        "thumbnail": "/items/easel/thumbnail.webp",
+        "src": "/items/easel/model.glb",
+        "dimensions": [
+          1.5,
+          2.3,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_x": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_x",
+      "type": "item",
+      "name": "资料柜",
+      "parentId": "level_dof_demo",
+      "position": [
+        15.65,
+        0,
+        2.1
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "bookshelf",
+        "category": "furniture",
+        "name": "Bookshelf",
+        "thumbnail": "/items/bookshelf/thumbnail.webp",
+        "src": "/items/bookshelf/model.glb",
+        "dimensions": [
+          1,
+          2,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_y": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_y",
+      "type": "item",
+      "name": "工位台灯",
+      "parentId": "level_dof_demo",
+      "position": [
+        3.2,
+        0.75,
+        1.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "table-lamp",
+        "category": "furniture",
+        "name": "Table Lamp",
+        "thumbnail": "/items/table-lamp/thumbnail.webp",
+        "src": "/items/table-lamp/model.glb",
+        "dimensions": [
+          0.5,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_z": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_z",
+      "type": "item",
+      "name": "工位台灯",
+      "parentId": "level_dof_demo",
+      "position": [
+        9.2,
+        0.75,
+        5.2
+      ],
+      "rotation": [
+        0,
+        0.15,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "table-lamp",
+        "category": "furniture",
+        "name": "Table Lamp",
+        "thumbnail": "/items/table-lamp/thumbnail.webp",
+        "src": "/items/table-lamp/model.glb",
+        "dimensions": [
+          0.5,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_10": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_10",
+      "type": "item",
+      "name": "文印边柜",
+      "parentId": "level_dof_demo",
+      "position": [
+        0.85,
+        0,
+        0.35
+      ],
+      "rotation": [
+        0,
+        0.2,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "bookshelf",
+        "category": "furniture",
+        "name": "Bookshelf",
+        "thumbnail": "/items/bookshelf/thumbnail.webp",
+        "src": "/items/bookshelf/model.glb",
+        "dimensions": [
+          1,
+          2,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_11": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_11",
+      "type": "item",
+      "name": "办公垃圾桶",
+      "parentId": "level_dof_demo",
+      "position": [
+        15.75,
+        0,
+        7.55
+      ],
+      "rotation": [
+        0,
+        0.4,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "trash-bin",
+        "category": "furniture",
+        "name": "Trash Bin",
+        "thumbnail": "/items/trash-bin/thumbnail.webp",
+        "src": "/items/trash-bin/model.glb",
+        "dimensions": [
+          0.5,
+          0.6,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_12": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_12",
+      "type": "item",
+      "name": "会议长条桌",
+      "parentId": "level_dof_demo",
+      "position": [
+        9.1,
+        0,
+        13.22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        2.35,
+        1,
+        0.92
+      ],
+      "asset": {
+        "id": "dining-table",
+        "category": "furniture",
+        "name": "Dining Table",
+        "thumbnail": "/items/dining-table/thumbnail.webp",
+        "src": "/items/dining-table/model.glb",
+        "dimensions": [
+          2.5,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.8
+        }
+      }
+    },
+    "item_dof_13": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  body{margin:0;min-height:100vh;background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);\n  color:#f5f5f7;font:12px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;padding:12px;display:flex;align-items:stretch}\n  .panel{flex:1;padding:14px 16px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#bf5af2}\n  h1{margin:6px 0 8px;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  li{margin:4px 0;color:#a1a1a6;line-height:1.4}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">会议</span><h1>议程</h1><ul><li>季度 OKR</li><li>产线节拍复盘</li></ul></div></body></html>"
+        }
+      },
+      "id": "item_dof_13",
+      "type": "item",
+      "name": "会议投屏",
+      "parentId": "level_dof_demo",
+      "position": [
+        6.52,
+        0.8,
+        13.22
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_14": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_14",
+      "type": "item",
+      "name": "会议椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.62,
+        0,
+        13.22
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-chair",
+        "category": "furniture",
+        "name": "Dining Chair",
+        "thumbnail": "/items/dining-chair/thumbnail.webp",
+        "src": "/items/dining-chair/model.glb",
+        "dimensions": [
+          0.5,
+          1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_15": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_15",
+      "type": "item",
+      "name": "会议椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        10.36,
+        0,
+        14.06870489570875
+      ],
+      "rotation": [
+        0,
+        4.1887902047863905,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-chair",
+        "category": "furniture",
+        "name": "Dining Chair",
+        "thumbnail": "/items/dining-chair/thumbnail.webp",
+        "src": "/items/dining-chair/model.glb",
+        "dimensions": [
+          0.5,
+          1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_16": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_16",
+      "type": "item",
+      "name": "会议椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        7.84,
+        0,
+        14.06870489570875
+      ],
+      "rotation": [
+        0,
+        5.235987755982988,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-chair",
+        "category": "furniture",
+        "name": "Dining Chair",
+        "thumbnail": "/items/dining-chair/thumbnail.webp",
+        "src": "/items/dining-chair/model.glb",
+        "dimensions": [
+          0.5,
+          1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_17": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_17",
+      "type": "item",
+      "name": "会议椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        6.58,
+        0,
+        13.22
+      ],
+      "rotation": [
+        0,
+        6.283185307179586,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-chair",
+        "category": "furniture",
+        "name": "Dining Chair",
+        "thumbnail": "/items/dining-chair/thumbnail.webp",
+        "src": "/items/dining-chair/model.glb",
+        "dimensions": [
+          0.5,
+          1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_18": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_18",
+      "type": "item",
+      "name": "会议椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        7.839999999999998,
+        0,
+        12.371295104291251
+      ],
+      "rotation": [
+        0,
+        7.330382858376184,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-chair",
+        "category": "furniture",
+        "name": "Dining Chair",
+        "thumbnail": "/items/dining-chair/thumbnail.webp",
+        "src": "/items/dining-chair/model.glb",
+        "dimensions": [
+          0.5,
+          1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_19": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_19",
+      "type": "item",
+      "name": "会议椅",
+      "parentId": "level_dof_demo",
+      "position": [
+        10.36,
+        0,
+        12.371295104291251
+      ],
+      "rotation": [
+        0,
+        8.377580409572783,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-chair",
+        "category": "furniture",
+        "name": "Dining Chair",
+        "thumbnail": "/items/dining-chair/thumbnail.webp",
+        "src": "/items/dining-chair/model.glb",
+        "dimensions": [
+          0.5,
+          1,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1a": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1a",
+      "type": "item",
+      "name": "会议资料",
+      "parentId": "level_dof_demo",
+      "position": [
+        11.52,
+        0.8,
+        13.22
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "books",
+        "category": "furniture",
+        "name": "Books",
+        "thumbnail": "/items/books/thumbnail.webp",
+        "src": "/items/books/model.glb",
+        "dimensions": [
+          0.5,
+          0.3,
+          0.5
+        ],
+        "offset": [
+          -0.08,
+          0,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1b": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1b",
+      "type": "item",
+      "name": "会议室落地灯",
+      "parentId": "level_dof_demo",
+      "position": [
+        6.15,
+        0,
+        15.45
+      ],
+      "rotation": [
+        0,
+        0.35,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "floor-lamp",
+        "category": "furniture",
+        "name": "Floor Lamp",
+        "thumbnail": "/items/floor-lamp/thumbnail.webp",
+        "src": "/items/floor-lamp/model.glb",
+        "dimensions": [
+          1,
+          1.9,
+          1
+        ],
+        "offset": [
+          0.04,
+          0,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1c": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1c",
+      "type": "item",
+      "name": "茶水台",
+      "parentId": "level_dof_demo",
+      "position": [
+        13.5,
+        0,
+        -1.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1d": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "htmlPreview": {
+          "variant": "desk",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;\n  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;\n  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));\n  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}\n  .panel{padding:12px 14px;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)}\n  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#30d158}\n  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}\n  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}\n  </style></head><body><div class=\"panel\"><span class=\"tag\">茶水区</span>\n  <h1>自助</h1><p class=\"hint\">饮品、微波炉与杯具取用后请归位。</p></div></body></html>"
+        }
+      },
+      "id": "item_dof_1d",
+      "type": "item",
+      "name": "茶水间显示器",
+      "parentId": "level_dof_demo",
+      "position": [
+        13.1,
+        0.75,
+        -1.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "computer",
+        "category": "appliance",
+        "name": "Computer",
+        "thumbnail": "/items/computer/thumbnail.webp",
+        "src": "/items/computer/model.glb",
+        "dimensions": [
+          1,
+          0.5,
+          0.5
+        ],
+        "offset": [
+          0.01,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1e": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1e",
+      "type": "item",
+      "name": "咖啡机",
+      "parentId": "level_dof_demo",
+      "position": [
+        13.9,
+        0.75,
+        -0.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "coffee-machine",
+        "category": "appliance",
+        "name": "Coffee Machine",
+        "thumbnail": "/items/coffee-machine/thumbnail.webp",
+        "src": "/items/coffee-machine/model.glb",
+        "dimensions": [
+          0.5,
+          0.3,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          -0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1f": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1f",
+      "type": "item",
+      "name": "微波炉",
+      "parentId": "level_dof_demo",
+      "position": [
+        12.55,
+        0.75,
+        -0.72
+      ],
+      "rotation": [
+        0,
+        0.08,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "microwave",
+        "category": "kitchen",
+        "name": "Microwave",
+        "thumbnail": "/items/microwave/thumbnail.webp",
+        "src": "/items/microwave/model.glb",
+        "dimensions": [
+          1,
+          0.3,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          -0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1g": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1g",
+      "type": "item",
+      "name": "线边台",
+      "parentId": "level_dof_demo",
+      "position": [
+        19,
+        0,
+        2.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1h": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1h",
+      "type": "item",
+      "name": "线边台",
+      "parentId": "level_dof_demo",
+      "position": [
+        22.4,
+        0,
+        2.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1i": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1i",
+      "type": "item",
+      "name": "线边台",
+      "parentId": "level_dof_demo",
+      "position": [
+        25.799999999999997,
+        0,
+        2.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1j": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1j",
+      "type": "item",
+      "name": "线边台",
+      "parentId": "level_dof_demo",
+      "position": [
+        29.199999999999996,
+        0,
+        2.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1k": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1k",
+      "type": "item",
+      "name": "线边台",
+      "parentId": "level_dof_demo",
+      "position": [
+        32.599999999999994,
+        0,
+        2.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1l": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1l",
+      "type": "item",
+      "name": "线边台",
+      "parentId": "level_dof_demo",
+      "position": [
+        35.99999999999999,
+        0,
+        2.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1m": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1m",
+      "type": "item",
+      "name": "来料架",
+      "parentId": "level_dof_demo",
+      "position": [
+        19.5,
+        0,
+        0.35
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "drying-rack",
+        "category": "bathroom",
+        "name": "Drying Rack",
+        "thumbnail": "/items/drying-rack/thumbnail.webp",
+        "src": "/items/drying-rack/model.glb",
+        "dimensions": [
+          2,
+          1.1,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1n": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1n",
+      "type": "item",
+      "name": "料箱架",
+      "parentId": "level_dof_demo",
+      "position": [
+        27,
+        0,
+        0.55
+      ],
+      "rotation": [
+        0,
+        0.6283185307179586,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "bookshelf",
+        "category": "furniture",
+        "name": "Bookshelf",
+        "thumbnail": "/items/bookshelf/thumbnail.webp",
+        "src": "/items/bookshelf/model.glb",
+        "dimensions": [
+          1,
+          2,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1o": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1o",
+      "type": "item",
+      "name": "清洗单元",
+      "parentId": "level_dof_demo",
+      "position": [
+        23,
+        0,
+        0.95
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "washing-machine",
+        "category": "bathroom",
+        "name": "Washing Machine",
+        "thumbnail": "/items/washing-machine/thumbnail.webp",
+        "src": "/items/washing-machine/model.glb",
+        "dimensions": [
+          1,
+          1,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1p": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1p",
+      "type": "item",
+      "name": "装配工位",
+      "parentId": "level_dof_demo",
+      "position": [
+        31,
+        0,
+        1.05
+      ],
+      "rotation": [
+        0,
+        -0.12,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "sewing-machine",
+        "category": "appliance",
+        "name": "Sewing Machine",
+        "thumbnail": "/items/sewing-machine/thumbnail.webp",
+        "src": "/items/sewing-machine/model.glb",
+        "dimensions": [
+          1,
+          0.7,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1q": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1q",
+      "type": "item",
+      "name": "质检台",
+      "parentId": "level_dof_demo",
+      "position": [
+        25,
+        0,
+        13.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "kitchen-counter",
+        "category": "kitchen",
+        "name": "Kitchen Counter",
+        "thumbnail": "/items/kitchen-counter/thumbnail.webp",
+        "src": "/items/kitchen-counter/model.glb",
+        "dimensions": [
+          2,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.75
+        }
+      }
+    },
+    "item_dof_1r": {
+      "object": "node",
+      "visible": true,
+      "metadata": {
+        "screenRole": "belt-status",
+        "htmlPreview": {
+          "variant": "wall",
+          "srcDoc": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"/><style>\n  body{margin:0;min-height:100vh;background:linear-gradient(170deg,rgba(41,37,36,0.7),rgba(28,25,23,0.85));\n  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);\n  color:#fed7aa;font:11px system-ui;display:flex;align-items:center;justify-content:center;padding:14px}\n  .c{padding:14px 16px;border-radius:12px;max-width:90%;backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35);border-color:rgba(251,146,60,0.4)}\n  h1{margin:0 0 6px;font-size:12px;color:#fdba74}\n  </style></head><body><div class=\"c\"><h1>产线电子看板</h1><div>OEE · 节拍 · 异常</div></div></body></html>"
+        }
+      },
+      "id": "item_dof_1r",
+      "type": "item",
+      "name": "电子看板",
+      "parentId": "level_dof_demo",
+      "position": [
+        27.85,
+        0,
+        14.58
+      ],
+      "rotation": [
+        0,
+        -0.42,
+        0
+      ],
+      "scale": [
+        1.02,
+        1.02,
+        1.02
+      ],
+      "asset": {
+        "id": "television",
+        "category": "appliance",
+        "name": "Television",
+        "thumbnail": "/items/television/thumbnail.webp",
+        "src": "/items/television/model.glb",
+        "dimensions": [
+          2,
+          1.1,
+          0.5
+        ],
+        "offset": [
+          0.04,
+          0.035,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1s": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1s",
+      "type": "item",
+      "name": "包装台",
+      "parentId": "level_dof_demo",
+      "position": [
+        34,
+        0,
+        14.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "dining-table",
+        "category": "furniture",
+        "name": "Dining Table",
+        "thumbnail": "/items/dining-table/thumbnail.webp",
+        "src": "/items/dining-table/model.glb",
+        "dimensions": [
+          2.5,
+          0.8,
+          1
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "surface": {
+          "height": 0.8
+        }
+      }
+    },
+    "item_dof_1t": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1t",
+      "type": "item",
+      "name": "成品架",
+      "parentId": "level_dof_demo",
+      "position": [
+        37.5,
+        0,
+        14.8
+      ],
+      "rotation": [
+        0,
+        -0.5235987755982988,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "bookshelf",
+        "category": "furniture",
+        "name": "Bookshelf",
+        "thumbnail": "/items/bookshelf/thumbnail.webp",
+        "src": "/items/bookshelf/model.glb",
+        "dimensions": [
+          1,
+          2,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1u": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1u",
+      "type": "item",
+      "name": "叉车区标识",
+      "parentId": "level_dof_demo",
+      "position": [
+        35,
+        0,
+        0.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "parking-spot",
+        "category": "outdoor",
+        "name": "Parking Spot",
+        "thumbnail": "/items/parking-spot/thumbnail.webp",
+        "src": "/items/parking-spot/model.glb",
+        "dimensions": [
+          5,
+          1,
+          2.5
+        ],
+        "offset": [
+          0,
+          0,
+          0.01
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          0.72,
+          1,
+          0.65
+        ]
+      }
+    },
+    "item_dof_1v": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1v",
+      "type": "item",
+      "name": "立柱",
+      "parentId": "level_dof_demo",
+      "position": [
+        22,
+        0,
+        9
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "column",
+        "category": "furniture",
+        "name": "Column",
+        "thumbnail": "/items/column/thumbnail.webp",
+        "src": "/items/column/model.glb",
+        "dimensions": [
+          0.5,
+          2.6,
+          0.5
+        ],
+        "offset": [
+          0,
+          1.26,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "item_dof_1w": {
+      "object": "node",
+      "visible": true,
+      "metadata": {},
+      "id": "item_dof_1w",
+      "type": "item",
+      "name": "废料桶",
+      "parentId": "level_dof_demo",
+      "position": [
+        38.5,
+        0,
+        3.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "asset": {
+        "id": "trash-bin",
+        "category": "furniture",
+        "name": "Trash Bin",
+        "thumbnail": "/items/trash-bin/thumbnail.webp",
+        "src": "/items/trash-bin/model.glb",
+        "dimensions": [
+          0.5,
+          0.6,
+          0.5
+        ],
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "rootNodeIds": [
+    "building_dof_demo"
+  ]
+}

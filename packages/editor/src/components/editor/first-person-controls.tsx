@@ -1,5 +1,7 @@
 'use client'
 
+import { useScene } from '@pascal-app/core'
+import { useViewer } from '@pascal-app/viewer'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useCallback, useEffect, useRef } from 'react'
 import { Euler, Vector3 } from 'three'
@@ -26,22 +28,40 @@ const _euler = new Euler(0, 0, 0, 'YXZ')
 
 export const FirstPersonControls = () => {
   const { camera, gl } = useThree()
+  const isFirstPersonMode = useEditor((s) => s.isFirstPersonMode)
   const keysRef = useRef<Set<string>>(new Set())
   const yawRef = useRef(0)
   const pitchRef = useRef(0)
   const isLockedRef = useRef(false)
   const initializedRef = useRef(false)
 
-  // Initialize camera for first-person view: start at center of scene, on the ground
+  // Spawn near the active level's saved camera target (falls back to a sensible default).
   useEffect(() => {
+    if (!isFirstPersonMode) {
+      initializedRef.current = false
+      return
+    }
     if (initializedRef.current) return
     initializedRef.current = true
 
-    // Place camera at the origin (center of grid) at eye height, looking along +X
-    camera.position.set(0, EYE_HEIGHT, 0)
-    yawRef.current = 0
+    let x = 14
+    let z = 5
+    const levelId = useViewer.getState().selection.levelId
+    if (levelId) {
+      const level = useScene.getState().nodes[levelId] as
+        | { camera?: { target?: number[] } }
+        | undefined
+      const target = level?.camera?.target
+      if (target && target.length >= 3) {
+        x = target[0]!
+        z = target[2]!
+      }
+    }
+
+    camera.position.set(x, EYE_HEIGHT, z)
+    yawRef.current = 0.35
     pitchRef.current = 0
-  }, [camera])
+  }, [isFirstPersonMode, camera])
 
   // Pointer lock and event handlers
   useEffect(() => {
@@ -72,6 +92,9 @@ export const FirstPersonControls = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Skip if user is typing in an input
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return
+      }
+      if (e.target instanceof HTMLElement && e.target.isContentEditable) {
         return
       }
 
@@ -113,14 +136,14 @@ export const FirstPersonControls = () => {
     document.addEventListener('mousemove', handleMouseMove)
     // Use capture phase so we intercept movement keys before the global keyboard handler
     document.addEventListener('keydown', handleKeyDown, true)
-    document.addEventListener('keyup', handleKeyUp)
+    document.addEventListener('keyup', handleKeyUp, true)
 
     return () => {
       canvas.removeEventListener('click', requestLock)
       document.removeEventListener('pointerlockchange', handlePointerLockChange)
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('keydown', handleKeyDown, true)
-      document.removeEventListener('keyup', handleKeyUp)
+      document.removeEventListener('keyup', handleKeyUp, true)
       if (document.pointerLockElement === canvas) {
         document.exitPointerLock()
       }
@@ -207,21 +230,23 @@ export const FirstPersonOverlay = ({ onExit }: { onExit: () => void }) => {
           <kbd className="rounded border border-border/50 bg-accent/50 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
             ESC
           </kbd>
-          Exit Street View
+          退出漫游
         </button>
       </div>
 
       {/* Controls hint — bottom-center */}
       <div className="pointer-events-none fixed bottom-6 left-1/2 z-40 -translate-x-1/2">
         <div className="flex items-center gap-4 rounded-2xl border border-border/35 bg-background/80 px-5 py-3 shadow-lg backdrop-blur-xl">
-          <ControlHint label="Move" keys={['W', 'A', 'S', 'D']} />
+          <ControlHint label="移动" keys={['W', 'A', 'S', 'D']} />
           <div className="h-5 w-px bg-border/30" />
-          <ControlHint label="Up" keys={['Q']} />
-          <ControlHint label="Down" keys={['E']} />
+          <ControlHint label="上升" keys={['Q']} />
+          <ControlHint label="下降" keys={['E']} />
           <div className="h-5 w-px bg-border/30" />
-          <ControlHint label="Sprint" keys={['Shift']} />
+          <ControlHint label="冲刺" keys={['Shift']} />
           <div className="h-5 w-px bg-border/30" />
-          <span className="text-muted-foreground/60 text-xs">Click to look around</span>
+          <span className="max-w-[220px] text-center text-muted-foreground/70 text-xs leading-snug">
+            点击画布锁定指针后可拖动环顾；WASD 在地面高度移动
+          </span>
         </div>
       </div>
     </>

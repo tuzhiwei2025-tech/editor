@@ -13,6 +13,7 @@ import {
   DoorOpen,
   Eye,
   EyeOff,
+  Factory,
   FileJson,
   Grid3X3,
   Hexagon,
@@ -35,6 +36,11 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { deleteLevelWithFallbackSelection } from '../../../lib/level-selection'
+import {
+  applySceneGraphToEditor,
+  saveSceneToLocalStorage,
+  type SceneGraph,
+} from '../../../lib/scene'
 import { useCommandRegistry } from '../../../store/use-command-registry'
 import type { StructureTool } from '../../../store/use-editor'
 import useEditor from '../../../store/use-editor'
@@ -56,6 +62,10 @@ export function EditorCommands() {
       setOpen(false)
     }
 
+    const runAsync = (fn: () => Promise<void>) => {
+      void fn().finally(() => setOpen(false))
+    }
+
     const activateTool = (tool: StructureTool) => {
       run(() => {
         setPhase('structure')
@@ -69,74 +79,104 @@ export function EditorCommands() {
       // ── Scene ────────────────────────────────────────────────────────────
       {
         id: 'editor.tool.wall',
-        label: 'Wall Tool',
-        group: 'Scene',
+        label: '墙体工具',
+        group: '场景',
         icon: <Square className="h-4 w-4" />,
-        keywords: ['draw', 'build', 'structure'],
+        keywords: ['draw', 'build', 'structure', '墙', '绘制', '结构'],
         execute: () => activateTool('wall'),
       },
       {
         id: 'editor.tool.slab',
-        label: 'Slab Tool',
-        group: 'Scene',
+        label: '楼板工具',
+        group: '场景',
         icon: <Layers className="h-4 w-4" />,
-        keywords: ['floor', 'build'],
+        keywords: ['floor', 'build', '楼板', '地面'],
         execute: () => activateTool('slab'),
       },
       {
         id: 'editor.tool.ceiling',
-        label: 'Ceiling Tool',
-        group: 'Scene',
+        label: '天花板工具',
+        group: '场景',
         icon: <Grid3X3 className="h-4 w-4" />,
-        keywords: ['top', 'build'],
+        keywords: ['top', 'build', '天花', '顶'],
         execute: () => activateTool('ceiling'),
       },
       {
         id: 'editor.tool.door',
-        label: 'Door Tool',
-        group: 'Scene',
+        label: '门工具',
+        group: '场景',
         icon: <DoorOpen className="h-4 w-4" />,
-        keywords: ['opening', 'entrance'],
+        keywords: ['opening', 'entrance', '门', '入口'],
         execute: () => activateTool('door'),
       },
       {
         id: 'editor.tool.window',
-        label: 'Window Tool',
-        group: 'Scene',
+        label: '窗工具',
+        group: '场景',
         icon: <AppWindow className="h-4 w-4" />,
-        keywords: ['opening', 'glass'],
+        keywords: ['opening', 'glass', '窗', '窗户'],
         execute: () => activateTool('window'),
       },
       {
         id: 'editor.tool.item',
-        label: 'Item Tool',
-        group: 'Scene',
+        label: '物品工具',
+        group: '场景',
         icon: <Package className="h-4 w-4" />,
-        keywords: ['furniture', 'object', 'asset', 'furnish'],
+        keywords: ['furniture', 'object', 'asset', 'furnish', '家具', '陈设', '物品'],
         execute: () => activateTool('item'),
       },
       {
+        id: 'editor.demo.digital-office-factory',
+        label: '加载演示：数字办公与流水线工厂',
+        group: '场景',
+        icon: <Factory className="h-4 w-4" />,
+        keywords: [
+          'demo',
+          'sample',
+          'office',
+          'factory',
+          'pipeline',
+          'collab',
+          '协同',
+          '办公',
+          '工厂',
+          '产线',
+          '演示',
+        ],
+        execute: () =>
+          runAsync(async () => {
+            const res = await fetch('/demos/demo_office.json')
+            if (!res.ok) {
+              console.error('[Editor] Failed to load demo scene', res.status)
+              return
+            }
+            const graph = (await res.json()) as SceneGraph
+            applySceneGraphToEditor(graph)
+            saveSceneToLocalStorage(graph)
+          }),
+      },
+      {
         id: 'editor.tool.stair',
-        label: 'Stair Tool',
-        group: 'Scene',
+        label: '楼梯工具',
+        group: '场景',
         icon: <ArrowRight className="h-4 w-4" />,
-        keywords: ['stairs', 'staircase', 'flight', 'landing', 'steps'],
+        keywords: ['stairs', 'staircase', 'flight', 'landing', 'steps', '楼梯', '梯'],
         execute: () => activateTool('stair'),
       },
       {
         id: 'editor.tool.zone',
-        label: 'Zone Tool',
-        group: 'Scene',
+        label: '分区工具',
+        group: '场景',
         icon: <Hexagon className="h-4 w-4" />,
-        keywords: ['area', 'room', 'space'],
+        keywords: ['area', 'room', 'space', '分区', '区域'],
         execute: () => activateTool('zone'),
       },
       {
         id: 'editor.delete-selection',
-        label: 'Delete Selection',
-        group: 'Scene',
+        label: '删除选中',
+        group: '场景',
         icon: <Trash2 className="h-4 w-4" />,
-        keywords: ['remove', 'erase'],
+        keywords: ['remove', 'erase', '删除'],
         shortcut: ['⌫'],
         when: () => useViewer.getState().selection.selectedIds.length > 0,
         execute: () =>
@@ -149,20 +189,20 @@ export function EditorCommands() {
       // ── Levels ───────────────────────────────────────────────────────────
       {
         id: 'editor.level.goto',
-        label: 'Go to Level',
-        group: 'Levels',
+        label: '前往楼层',
+        group: '楼层',
         icon: <ArrowRight className="h-4 w-4" />,
-        keywords: ['level', 'floor', 'go', 'navigate', 'switch', 'select'],
+        keywords: ['level', 'floor', 'go', 'navigate', 'switch', 'select', '楼层', '切换'],
         navigate: true,
         when: () => Object.values(useScene.getState().nodes).some((n) => n.type === 'level'),
         execute: () => navigateTo('goto-level'),
       },
       {
         id: 'editor.level.add',
-        label: 'Add Level',
-        group: 'Levels',
+        label: '添加楼层',
+        group: '楼层',
         icon: <Plus className="h-4 w-4" />,
-        keywords: ['level', 'floor', 'add', 'create', 'new'],
+        keywords: ['level', 'floor', 'add', 'create', 'new', '新建', '添加'],
         execute: () =>
           run(() => {
             const { nodes } = useScene.getState()
@@ -179,10 +219,10 @@ export function EditorCommands() {
       },
       {
         id: 'editor.level.rename',
-        label: 'Rename Level',
-        group: 'Levels',
+        label: '重命名楼层',
+        group: '楼层',
         icon: <PencilLine className="h-4 w-4" />,
-        keywords: ['level', 'floor', 'rename', 'name'],
+        keywords: ['level', 'floor', 'rename', 'name', '重命名'],
         navigate: true,
         when: () => !!useViewer.getState().selection.levelId,
         execute: () => {
@@ -195,10 +235,10 @@ export function EditorCommands() {
       },
       {
         id: 'editor.level.delete',
-        label: 'Delete Level',
-        group: 'Levels',
+        label: '删除楼层',
+        group: '楼层',
         icon: <Trash2 className="h-4 w-4" />,
-        keywords: ['level', 'floor', 'delete', 'remove'],
+        keywords: ['level', 'floor', 'delete', 'remove', '删除'],
         when: () => {
           const levelId = useViewer.getState().selection.levelId
           if (!levelId) return false
@@ -216,26 +256,26 @@ export function EditorCommands() {
       // ── Viewer Controls ──────────────────────────────────────────────────
       {
         id: 'editor.viewer.wall-mode',
-        label: 'Wall Mode',
-        group: 'Viewer Controls',
+        label: '墙体显示模式',
+        group: '视图控制',
         icon: <Layers className="h-4 w-4" />,
-        keywords: ['wall', 'cutaway', 'up', 'down', 'view'],
+        keywords: ['wall', 'cutaway', 'up', 'down', 'view', '墙', '剖切'],
         badge: () => {
           const mode = useViewer.getState().wallMode
-          return { cutaway: 'Cutaway', up: 'Up', down: 'Down' }[mode]
+          return { cutaway: '剖切', up: '全高', down: '低矮' }[mode]
         },
         navigate: true,
         execute: () => navigateTo('wall-mode'),
       },
       {
         id: 'editor.viewer.level-mode',
-        label: 'Level Mode',
-        group: 'Viewer Controls',
+        label: '楼层显示模式',
+        group: '视图控制',
         icon: <SquareStack className="h-4 w-4" />,
-        keywords: ['level', 'floor', 'exploded', 'stacked', 'solo'],
+        keywords: ['level', 'floor', 'exploded', 'stacked', 'solo', '楼层', '堆叠'],
         badge: () => {
           const mode = useViewer.getState().levelMode
-          return { manual: 'Manual', stacked: 'Stacked', exploded: 'Exploded', solo: 'Solo' }[mode]
+          return { manual: '手动', stacked: '堆叠', exploded: '分解', solo: '单层' }[mode]
         },
         navigate: true,
         execute: () => navigateTo('level-mode'),
@@ -244,11 +284,11 @@ export function EditorCommands() {
         id: 'editor.viewer.camera-mode',
         label: () => {
           const mode = useViewer.getState().cameraMode
-          return `Camera: Switch to ${mode === 'perspective' ? 'Orthographic' : 'Perspective'}`
+          return `相机：切换为${mode === 'perspective' ? '正交' : '透视'}`
         },
-        group: 'Viewer Controls',
+        group: '视图控制',
         icon: <Video className="h-4 w-4" />,
-        keywords: ['camera', 'ortho', 'perspective', '2d', '3d', 'view'],
+        keywords: ['camera', 'ortho', 'perspective', '2d', '3d', 'view', '相机', '透视', '正交'],
         execute: () =>
           run(() => {
             const { cameraMode, setCameraMode } = useViewer.getState()
@@ -259,11 +299,11 @@ export function EditorCommands() {
         id: 'editor.viewer.theme',
         label: () => {
           const theme = useViewer.getState().theme
-          return theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'
+          return theme === 'dark' ? '切换为浅色主题' : '切换为深色主题'
         },
-        group: 'Viewer Controls',
+        group: '视图控制',
         icon: <Sun className="h-4 w-4" />, // icon is static; label conveys the action
-        keywords: ['theme', 'dark', 'light', 'appearance', 'color'],
+        keywords: ['theme', 'dark', 'light', 'appearance', 'color', '主题', '深色', '浅色'],
         execute: () =>
           run(() => {
             const { theme, setTheme } = useViewer.getState()
@@ -272,10 +312,10 @@ export function EditorCommands() {
       },
       {
         id: 'editor.viewer.camera-snapshot',
-        label: 'Camera Snapshot',
-        group: 'Viewer Controls',
+        label: '相机快照',
+        group: '视图控制',
         icon: <Camera className="h-4 w-4" />,
-        keywords: ['camera', 'snapshot', 'capture', 'save', 'view', 'bookmark'],
+        keywords: ['camera', 'snapshot', 'capture', 'save', 'view', 'bookmark', '快照', '相机'],
         navigate: true,
         execute: () => navigateTo('camera-view'),
       },
@@ -283,18 +323,18 @@ export function EditorCommands() {
       // ── View ─────────────────────────────────────────────────────────────
       {
         id: 'editor.view.preview',
-        label: () => (isPreviewMode ? 'Exit Preview' : 'Enter Preview'),
-        group: 'View',
+        label: () => (isPreviewMode ? '退出预览' : '进入预览'),
+        group: '视图',
         icon: isPreviewMode ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />,
-        keywords: ['preview', 'view', 'read-only', 'present'],
+        keywords: ['preview', 'view', 'read-only', 'present', '预览'],
         execute: () => run(() => setPreviewMode(!isPreviewMode)),
       },
       {
         id: 'editor.view.fullscreen',
-        label: 'Toggle Fullscreen',
-        group: 'View',
+        label: '全屏切换',
+        group: '视图',
         icon: <Maximize2 className="h-4 w-4" />,
-        keywords: ['fullscreen', 'maximize', 'expand', 'window'],
+        keywords: ['fullscreen', 'maximize', 'expand', 'window', '全屏'],
         execute: () =>
           run(() => {
             if (document.fullscreenElement) document.exitFullscreen()
@@ -305,28 +345,28 @@ export function EditorCommands() {
       // ── History ──────────────────────────────────────────────────────────
       {
         id: 'editor.history.undo',
-        label: 'Undo',
-        group: 'History',
+        label: '撤销',
+        group: '历史',
         icon: <Undo2 className="h-4 w-4" />,
-        keywords: ['undo', 'revert', 'back'],
+        keywords: ['undo', 'revert', 'back', '撤销'],
         execute: () => run(() => useScene.temporal.getState().undo()),
       },
       {
         id: 'editor.history.redo',
-        label: 'Redo',
-        group: 'History',
+        label: '重做',
+        group: '历史',
         icon: <Redo2 className="h-4 w-4" />,
-        keywords: ['redo', 'forward', 'repeat'],
+        keywords: ['redo', 'forward', 'repeat', '重做'],
         execute: () => run(() => useScene.temporal.getState().redo()),
       },
 
       // ── Export & Share ───────────────────────────────────────────────────
       {
         id: 'editor.export.json',
-        label: 'Export Scene (JSON)',
-        group: 'Export & Share',
+        label: '导出场景 (JSON)',
+        group: '导出与分享',
         icon: <FileJson className="h-4 w-4" />,
-        keywords: ['export', 'download', 'json', 'save', 'data'],
+        keywords: ['export', 'download', 'json', 'save', 'data', '导出'],
         execute: () =>
           run(() => {
             const { nodes, rootNodeIds } = useScene.getState()
@@ -345,28 +385,28 @@ export function EditorCommands() {
         ? [
             {
               id: 'editor.export.glb',
-              label: 'Export 3D Model (GLB)',
-              group: 'Export & Share',
+              label: '导出 3D 模型 (GLB)',
+              group: '导出与分享',
               icon: <Box className="h-4 w-4" />,
-              keywords: ['export', 'glb', 'gltf', '3d', 'model', 'download'],
+              keywords: ['export', 'glb', 'gltf', '3d', 'model', 'download', '导出', '模型'],
               execute: () => run(() => exportScene()),
             } as const,
           ]
         : []),
       {
         id: 'editor.export.share-link',
-        label: 'Copy Share Link',
-        group: 'Export & Share',
+        label: '复制分享链接',
+        group: '导出与分享',
         icon: <Copy className="h-4 w-4" />,
-        keywords: ['share', 'copy', 'url', 'link'],
+        keywords: ['share', 'copy', 'url', 'link', '分享', '链接'],
         execute: () => run(() => navigator.clipboard.writeText(window.location.href)),
       },
       {
         id: 'editor.export.screenshot',
-        label: 'Take Screenshot',
-        group: 'Export & Share',
+        label: '截图',
+        group: '导出与分享',
         icon: <Camera className="h-4 w-4" />,
-        keywords: ['screenshot', 'capture', 'image', 'photo', 'png'],
+        keywords: ['screenshot', 'capture', 'image', 'photo', 'png', '截图'],
         execute: () =>
           run(() => {
             const canvas = document.querySelector('canvas')

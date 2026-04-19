@@ -79,12 +79,12 @@ export function WallPanel() {
     <PanelWrapper
       icon="/icons/wall.png"
       onClose={handleClose}
-      title={node.name || 'Wall'}
+      title={node.name || '墙体'}
       width={280}
     >
-      <PanelSection title="Dimensions">
+      <PanelSection title="尺寸">
         <SliderControl
-          label="Length"
+          label="长度"
           max={20}
           min={0.1}
           onChange={handleUpdateLength}
@@ -94,7 +94,7 @@ export function WallPanel() {
           value={length}
         />
         <SliderControl
-          label="Height"
+          label="高度"
           max={6}
           min={0.1}
           onChange={(v) => handleUpdate({ height: Math.max(0.1, v) })}
@@ -104,7 +104,7 @@ export function WallPanel() {
           value={Math.round(height * 100) / 100}
         />
         <SliderControl
-          label="Thickness"
+          label="厚度"
           max={1}
           min={0.05}
           onChange={(v) => handleUpdate({ thickness: Math.max(0.05, v) })}
@@ -115,7 +115,7 @@ export function WallPanel() {
         />
       </PanelSection>
 
-      <PanelSection title="Material">
+      <PanelSection title="材质">
         <MaterialPicker onChange={handleMaterialChange} value={node.material} />
       </PanelSection>
     </PanelWrapper>

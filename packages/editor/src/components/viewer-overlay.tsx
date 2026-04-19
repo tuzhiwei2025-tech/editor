@@ -11,10 +11,20 @@ import {
   type ZoneNode,
 } from '@pascal-app/core'
 import { useViewer } from '@pascal-app/viewer'
-import { ArrowLeft, Camera, ChevronRight, Diamond, Layers, Moon, Sun } from 'lucide-react'
+import {
+  ArrowLeft,
+  Camera,
+  ChevronRight,
+  Diamond,
+  Footprints,
+  Layers,
+  Moon,
+  Sun,
+} from 'lucide-react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { cn } from '../lib/utils'
+import useEditor from '../store/use-editor'
 import { ActionButton } from './ui/action-menu/action-button'
 import { TooltipProvider } from './ui/primitives/tooltip'
 
@@ -26,47 +36,47 @@ type ProjectOwner = {
 }
 
 const levelModeLabels: Record<'stacked' | 'exploded' | 'solo', string> = {
-  stacked: 'Stacked',
-  exploded: 'Exploded',
-  solo: 'Solo',
+  stacked: '堆叠',
+  exploded: '分解',
+  solo: '单层',
 }
 
 const levelModeBadgeLabels: Record<'manual' | 'stacked' | 'exploded' | 'solo', string> = {
-  manual: 'Stack',
-  stacked: 'Stack',
-  exploded: 'Exploded',
-  solo: 'Solo',
+  manual: '堆叠',
+  stacked: '堆叠',
+  exploded: '分解',
+  solo: '单层',
 }
 
 const wallModeConfig = {
   up: {
     icon: (props: any) => (
-      <img alt="Full Height" height={28} src="/icons/room.png" width={28} {...props} />
+      <img alt="全高" height={28} src="/icons/room.png" width={28} {...props} />
     ),
-    label: 'Full Height',
+    label: '全高',
   },
   cutaway: {
     icon: (props: any) => (
-      <img alt="Cutaway" height={28} src="/icons/wallcut.png" width={28} {...props} />
+      <img alt="剖切" height={28} src="/icons/wallcut.png" width={28} {...props} />
     ),
-    label: 'Cutaway',
+    label: '剖切',
   },
   down: {
     icon: (props: any) => (
-      <img alt="Low" height={28} src="/icons/walllow.png" width={28} {...props} />
+      <img alt="低矮" height={28} src="/icons/walllow.png" width={28} {...props} />
     ),
-    label: 'Low',
+    label: '低矮',
   },
 }
 
 const getNodeName = (node: AnyNode): string => {
   if ('name' in node && node.name) return node.name
-  if (node.type === 'wall') return 'Wall'
-  if (node.type === 'item') return (node as { asset: { name: string } }).asset?.name || 'Item'
-  if (node.type === 'slab') return 'Slab'
-  if (node.type === 'ceiling') return 'Ceiling'
-  if (node.type === 'roof') return 'Roof'
-  if (node.type === 'roof-segment') return 'Roof Segment'
+  if (node.type === 'wall') return '墙体'
+  if (node.type === 'item') return (node as { asset: { name: string } }).asset?.name || '物品'
+  if (node.type === 'slab') return '楼板'
+  if (node.type === 'ceiling') return '天花板'
+  if (node.type === 'roof') return '屋顶'
+  if (node.type === 'roof-segment') return '屋顶分段'
   return node.type
 }
 
@@ -76,6 +86,8 @@ interface ViewerOverlayProps {
   canShowScans?: boolean
   canShowGuides?: boolean
   onBack?: () => void
+  /** 显示「进入漫游」入口（第一人称行走，与编辑态工具栏漫游一致） */
+  showWalkthroughEntry?: boolean
 }
 
 export const ViewerOverlay = ({
@@ -84,6 +96,7 @@ export const ViewerOverlay = ({
   canShowScans = true,
   canShowGuides = true,
   onBack,
+  showWalkthroughEntry = false,
 }: ViewerOverlayProps) => {
   const selection = useViewer((s) => s.selection)
   const nodes = useScene((s) => s.nodes)
@@ -139,24 +152,37 @@ export const ViewerOverlay = ({
         <div className="pointer-events-auto flex min-w-[200px] flex-col overflow-hidden rounded-2xl border border-border/40 bg-background/95 shadow-lg backdrop-blur-xl transition-colors duration-200 ease-out">
           {/* Project info + back */}
           <div className="flex items-center gap-3 px-3 py-2.5">
-            {onBack ? (
-              <button
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-white/10"
-                onClick={onBack}
-              >
-                <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-              </button>
-            ) : (
-              <Link
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-white/10"
-                href="/"
-              >
-                <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-              </Link>
-            )}
+            <div className="flex shrink-0 items-center gap-1.5">
+              {onBack ? (
+                <button
+                  className="flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-white/10"
+                  onClick={onBack}
+                  type="button"
+                >
+                  <ArrowLeft className="h-4 w-4 text-muted-foreground" />
+                </button>
+              ) : (
+                <Link
+                  className="flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-white/10"
+                  href="/"
+                >
+                  <ArrowLeft className="h-4 w-4 text-muted-foreground" />
+                </Link>
+              )}
+              {showWalkthroughEntry ? (
+                <button
+                  className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-emerald-500/15 hover:text-emerald-400"
+                  onClick={() => useEditor.getState().setFirstPersonMode(true)}
+                  title="进入漫游"
+                  type="button"
+                >
+                  <Footprints className="h-4 w-4" />
+                </button>
+              ) : null}
+            </div>
             <div className="min-w-0">
               <div className="truncate font-medium text-foreground text-sm">
-                {projectName || 'Untitled'}
+                {projectName || '未命名'}
               </div>
               {owner?.username && (
                 <Link
@@ -177,7 +203,7 @@ export const ViewerOverlay = ({
                   className="text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => handleBreadcrumbClick('root')}
                 >
-                  Site
+                  场地
                 </button>
 
                 {building && (
@@ -187,7 +213,7 @@ export const ViewerOverlay = ({
                       className={`truncate transition-colors ${level ? 'text-muted-foreground hover:text-foreground' : 'font-medium text-foreground'}`}
                       onClick={() => handleBreadcrumbClick('building')}
                     >
-                      {building.name || 'Building'}
+                      {building.name || '建筑'}
                     </button>
                   </>
                 )}
@@ -199,7 +225,7 @@ export const ViewerOverlay = ({
                       className={`truncate transition-colors ${zone ? 'text-muted-foreground hover:text-foreground' : 'font-medium text-foreground'}`}
                       onClick={() => handleBreadcrumbClick('level')}
                     >
-                      {level.name || `Level ${level.level}`}
+                      {level.name || `第 ${level.level} 层`}
                     </button>
                   </>
                 )}
@@ -232,7 +258,7 @@ export const ViewerOverlay = ({
         {building && levels.length > 0 && (
           <div className="pointer-events-auto flex w-48 flex-col overflow-hidden rounded-2xl border border-border/40 bg-background/95 py-1 shadow-lg backdrop-blur-xl transition-colors duration-200 ease-out">
             <span className="px-3 py-2 font-medium text-[10px] text-muted-foreground uppercase tracking-wider">
-              Levels
+              楼层
             </span>
             <div className="flex flex-col">
               {levels.map((lvl) => {
@@ -258,7 +284,7 @@ export const ViewerOverlay = ({
                         <Layers className="h-3.5 w-3.5" />
                       </span>
                       <div className="min-w-0 flex-1 truncate text-left">
-                        {lvl.name || `Level ${lvl.level}`}
+                        {lvl.name || `第 ${lvl.level} 层`}
                       </div>
                     </div>
                   </button>
@@ -275,7 +301,7 @@ export const ViewerOverlay = ({
           <div className="pointer-events-auto flex h-14 flex-row items-center justify-center gap-1.5 rounded-2xl border border-border/40 bg-background/95 p-1.5 shadow-lg backdrop-blur-xl transition-colors duration-200 ease-out">
             {/* Theme Toggle */}
             <button
-              aria-label="Toggle theme"
+              aria-label="切换主题"
               className="flex h-[36px] shrink-0 cursor-pointer items-center rounded-full border border-border/50 bg-accent/50 p-1"
               onClick={() => useViewer.getState().setTheme(theme === 'dark' ? 'light' : 'dark')}
               type="button"
@@ -328,14 +354,14 @@ export const ViewerOverlay = ({
                     ? 'bg-white/10'
                     : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0'
                 }
-                label={`Scans: ${showScans ? 'Visible' : 'Hidden'}`}
+                label={`扫描：${showScans ? '显示' : '隐藏'}`}
                 onClick={() => useViewer.getState().setShowScans(!showScans)}
                 size="icon"
                 tooltipSide="top"
                 variant="ghost"
               >
                 <img
-                  alt="Scans"
+                  alt="扫描"
                   className="h-[28px] w-[28px] object-contain"
                   src="/icons/mesh.png"
                 />
@@ -349,14 +375,14 @@ export const ViewerOverlay = ({
                     ? 'bg-white/10'
                     : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0'
                 }
-                label={`Guides: ${showGuides ? 'Visible' : 'Hidden'}`}
+                label={`参考图：${showGuides ? '显示' : '隐藏'}`}
                 onClick={() => useViewer.getState().setShowGuides(!showGuides)}
                 size="icon"
                 tooltipSide="top"
                 variant="ghost"
               >
                 <img
-                  alt="Guides"
+                  alt="参考图"
                   className="h-[28px] w-[28px] object-contain"
                   src="/icons/floorplan.png"
                 />
@@ -372,7 +398,7 @@ export const ViewerOverlay = ({
                   ? 'bg-violet-500/20 text-violet-400'
                   : 'hover:bg-white/5 hover:text-violet-400'
               }
-              label={`Camera: ${cameraMode === 'perspective' ? 'Perspective' : 'Orthographic'}`}
+              label={`相机：${cameraMode === 'perspective' ? '透视' : '正交'}`}
               onClick={() =>
                 useViewer
                   .getState()
@@ -393,7 +419,7 @@ export const ViewerOverlay = ({
                   ? 'text-muted-foreground/80 hover:bg-white/5 hover:text-foreground'
                   : 'bg-white/10 text-foreground',
               )}
-              label={`Levels: ${levelMode === 'manual' ? 'Manual' : levelModeLabels[levelMode as keyof typeof levelModeLabels]}`}
+              label={`楼层：${levelMode === 'manual' ? '手动' : levelModeLabels[levelMode as keyof typeof levelModeLabels]}`}
               onClick={() => {
                 if (levelMode === 'manual') return useViewer.getState().setLevelMode('stacked')
                 const modes: ('stacked' | 'exploded' | 'solo')[] = ['stacked', 'exploded', 'solo']
@@ -428,7 +454,7 @@ export const ViewerOverlay = ({
                   ? 'bg-white/10'
                   : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0'
               }
-              label={`Walls: ${wallModeConfig[wallMode as keyof typeof wallModeConfig].label}`}
+              label={`墙体：${wallModeConfig[wallMode as keyof typeof wallModeConfig].label}`}
               onClick={() => {
                 const modes: ('cutaway' | 'up' | 'down')[] = ['cutaway', 'up', 'down']
                 const nextIndex = (modes.indexOf(wallMode as any) + 1) % modes.length
@@ -449,14 +475,14 @@ export const ViewerOverlay = ({
             {/* Camera Actions */}
             <ActionButton
               className="group hidden hover:bg-white/5 sm:inline-flex"
-              label="Orbit Left"
+              label="向左环绕"
               onClick={() => emitter.emit('camera-controls:orbit-ccw')}
               size="icon"
               tooltipSide="top"
               variant="ghost"
             >
               <img
-                alt="Orbit Left"
+                alt="向左环绕"
                 className="h-[28px] w-[28px] -scale-x-100 object-contain opacity-70 transition-opacity group-hover:opacity-100"
                 src="/icons/rotate.png"
               />
@@ -464,14 +490,14 @@ export const ViewerOverlay = ({
 
             <ActionButton
               className="group hidden hover:bg-white/5 sm:inline-flex"
-              label="Orbit Right"
+              label="向右环绕"
               onClick={() => emitter.emit('camera-controls:orbit-cw')}
               size="icon"
               tooltipSide="top"
               variant="ghost"
             >
               <img
-                alt="Orbit Right"
+                alt="向右环绕"
                 className="h-[28px] w-[28px] object-contain opacity-70 transition-opacity group-hover:opacity-100"
                 src="/icons/rotate.png"
               />
@@ -479,14 +505,14 @@ export const ViewerOverlay = ({
 
             <ActionButton
               className="group hover:bg-white/5"
-              label="Top View"
+              label="顶视图"
               onClick={() => emitter.emit('camera-controls:top-view')}
               size="icon"
               tooltipSide="top"
               variant="ghost"
             >
               <img
-                alt="Top View"
+                alt="顶视图"
                 className="h-[28px] w-[28px] object-contain opacity-70 transition-opacity group-hover:opacity-100"
                 src="/icons/topview.png"
               />

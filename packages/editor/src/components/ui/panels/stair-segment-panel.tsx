@@ -24,14 +24,14 @@ import { SliderControl } from '../controls/slider-control'
 import { PanelWrapper } from './panel-wrapper'
 
 const SEGMENT_TYPE_OPTIONS: { label: string; value: StairSegmentType }[] = [
-  { label: 'Flight', value: 'stair' },
-  { label: 'Landing', value: 'landing' },
+  { label: '梯跑', value: 'stair' },
+  { label: '平台', value: 'landing' },
 ]
 
 const ATTACHMENT_SIDE_OPTIONS: { label: string; value: AttachmentSide }[] = [
-  { label: 'Front', value: 'front' },
-  { label: 'Left', value: 'left' },
-  { label: 'Right', value: 'right' },
+  { label: '前', value: 'front' },
+  { label: '左', value: 'left' },
+  { label: '右', value: 'right' },
 ]
 
 export function StairSegmentPanel() {
@@ -131,10 +131,10 @@ export function StairSegmentPanel() {
       icon="/icons/stairs.png"
       onBack={handleBack}
       onClose={handleClose}
-      title={node.name || 'Stair Segment'}
+      title={node.name || '楼梯分段'}
       width={300}
     >
-      <PanelSection title="Type">
+      <PanelSection title="类型">
         <SegmentedControl
           onChange={(v) => {
             const updates: Partial<StairSegmentNode> = { segmentType: v }
@@ -155,7 +155,7 @@ export function StairSegmentPanel() {
       </PanelSection>
 
       {!isFirstSegment && (
-        <PanelSection title="Attachment">
+        <PanelSection title="附着">
           <SegmentedControl
             onChange={(v) => handleUpdate({ attachmentSide: v })}
             options={ATTACHMENT_SIDE_OPTIONS}
@@ -164,9 +164,9 @@ export function StairSegmentPanel() {
         </PanelSection>
       )}
 
-      <PanelSection title="Dimensions">
+      <PanelSection title="尺寸">
         <SliderControl
-          label="Width"
+          label="宽度"
           max={5}
           min={0.5}
           onChange={(v) => handleUpdate({ width: v })}
@@ -176,7 +176,7 @@ export function StairSegmentPanel() {
           value={Math.round(node.width * 100) / 100}
         />
         <SliderControl
-          label="Length"
+          label="长度"
           max={10}
           min={0.5}
           onChange={(v) => handleUpdate({ length: v })}
@@ -188,7 +188,7 @@ export function StairSegmentPanel() {
         {node.segmentType === 'stair' && (
           <>
             <SliderControl
-              label="Height"
+              label="高度"
               max={10}
               min={0.5}
               onChange={(v) => handleUpdate({ height: v })}
@@ -198,7 +198,7 @@ export function StairSegmentPanel() {
               value={Math.round(node.height * 100) / 100}
             />
             <SliderControl
-              label="Steps"
+              label="踏步数"
               max={30}
               min={2}
               onChange={(v) => handleUpdate({ stepCount: Math.round(v) })}
@@ -211,9 +211,9 @@ export function StairSegmentPanel() {
         )}
       </PanelSection>
 
-      <PanelSection title="Structure">
+      <PanelSection title="结构">
         <div className="flex items-center justify-between px-1 py-1">
-          <span className="text-muted-foreground text-xs">Fill to floor</span>
+          <span className="text-muted-foreground text-xs">填充至地面</span>
           <button
             className={`relative h-5 w-10 rounded-full transition-colors ${
               node.fillToFloor ? 'bg-blue-500' : 'bg-[#3e3e3e]'
@@ -230,7 +230,7 @@ export function StairSegmentPanel() {
         </div>
         {!node.fillToFloor && (
           <SliderControl
-            label="Thickness"
+            label="厚度"
             max={1}
             min={0.05}
             onChange={(v) => handleUpdate({ thickness: v })}
@@ -242,7 +242,7 @@ export function StairSegmentPanel() {
         )}
       </PanelSection>
 
-      <PanelSection title="Position">
+      <PanelSection title="位置">
         <MetricControl
           label="X"
           max={50}
@@ -286,7 +286,7 @@ export function StairSegmentPanel() {
           value={Math.round(node.position[2] * 100) / 100}
         />
         <SliderControl
-          label="Rotation"
+          label="旋转"
           max={180}
           min={-180}
           onChange={(degrees) => {
@@ -315,23 +315,23 @@ export function StairSegmentPanel() {
         </div>
       </PanelSection>
 
-      <PanelSection title="Actions">
+      <PanelSection title="操作">
         <ActionGroup>
-          <ActionButton icon={<Move className="h-3.5 w-3.5" />} label="Move" onClick={handleMove} />
+          <ActionButton icon={<Move className="h-3.5 w-3.5" />} label="移动" onClick={handleMove} />
           <ActionButton
             icon={<Copy className="h-3.5 w-3.5" />}
-            label="Duplicate"
+            label="复制"
             onClick={handleDuplicate}
           />
           <ActionButton
             className="hover:bg-red-500/20"
             icon={<Trash2 className="h-3.5 w-3.5 text-red-400" />}
-            label="Delete"
+            label="删除"
             onClick={handleDelete}
           />
         </ActionGroup>
       </PanelSection>
-      <PanelSection title="Material">
+      <PanelSection title="材质">
         <MaterialPicker onChange={handleMaterialChange} value={node.material} />
       </PanelSection>
     </PanelWrapper>

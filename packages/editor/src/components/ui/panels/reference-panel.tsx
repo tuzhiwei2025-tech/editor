@@ -42,10 +42,10 @@ export function ReferencePanel() {
     <PanelWrapper
       icon={isScan ? undefined : undefined}
       onClose={handleClose}
-      title={node.name || (isScan ? '3D Scan' : 'Guide Image')}
+      title={node.name || (isScan ? '3D 扫描' : '参考图')}
       width={300}
     >
-      <PanelSection title="Position">
+      <PanelSection title="位置">
         <SliderControl
           label={
             <>
@@ -102,7 +102,7 @@ export function ReferencePanel() {
         />
       </PanelSection>
 
-      <PanelSection title="Rotation">
+      <PanelSection title="旋转">
         <SliderControl
           label={
             <>
@@ -142,7 +142,7 @@ export function ReferencePanel() {
         </div>
       </PanelSection>
 
-      <PanelSection title="Scale & Opacity">
+      <PanelSection title="缩放与不透明度">
         <SliderControl
           label={
             <>
@@ -162,7 +162,7 @@ export function ReferencePanel() {
         />
 
         <SliderControl
-          label="Opacity"
+          label="不透明度"
           max={100}
           min={0}
           onChange={(v) => handleUpdate({ opacity: v })}

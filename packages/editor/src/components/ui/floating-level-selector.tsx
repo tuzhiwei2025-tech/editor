@@ -24,7 +24,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from './primitives/popover'
 
 function getLevelDisplayLabel(level: LevelNode) {
-  return level.name || `Level ${level.level}`
+  return level.name || `第 ${level.level} 层`
 }
 
 // ── Inline rename input for a level row ─────────────────────────────────────
@@ -39,7 +39,7 @@ function LevelInlineRename({
   onStopEditing: () => void
 }) {
   const updateNode = useScene((s) => s.updateNode)
-  const defaultName = `Level ${level.level}`
+  const defaultName = `第 ${level.level} 层`
   const [value, setValue] = useState(level.name || '')
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -266,7 +266,7 @@ export function FloatingLevelSelector() {
           <button
             className={cn(addButtonClass, 'top-0 -translate-y-1/2')}
             onClick={handleAddAbove}
-            title="Add level above"
+            title="在上方添加楼层"
             type="button"
           >
             <Plus className="h-2.5 w-2.5" />
@@ -276,7 +276,7 @@ export function FloatingLevelSelector() {
           <button
             className={cn(addButtonClass, 'bottom-0 translate-y-1/2')}
             onClick={handleAddBelow}
-            title="Add level below"
+            title="在下方添加楼层"
             type="button"
           >
             <Plus className="h-2.5 w-2.5" />
@@ -308,7 +308,7 @@ export function FloatingLevelSelector() {
                     <button
                       className={cn(addButtonClass, 'bottom-0 translate-y-1/2')}
                       onClick={() => handleInsertBetween(sortedIndex - 1)}
-                      title="Insert level here"
+                      title="在此处插入楼层"
                       type="button"
                     >
                       <Plus className="h-2.5 w-2.5" />
@@ -325,11 +325,11 @@ export function FloatingLevelSelector() {
       <Dialog onOpenChange={(open) => !open && setDeletingLevel(null)} open={!!deletingLevel}>
         <DialogContent showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle>Delete level</DialogTitle>
+            <DialogTitle>删除楼层</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete{' '}
-              <strong>{deletingLevel ? getLevelDisplayLabel(deletingLevel) : ''}</strong>? All
-              walls, floors, and objects on this level will be permanently removed.
+              确定要删除{' '}
+              <strong>{deletingLevel ? getLevelDisplayLabel(deletingLevel) : ''}</strong>
+              吗？该楼层上的墙体、楼板和对象将被永久移除。
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -338,14 +338,14 @@ export function FloatingLevelSelector() {
               onClick={() => setDeletingLevel(null)}
               type="button"
             >
-              Cancel
+              取消
             </button>
             <button
               className="rounded-full bg-red-600 px-4 py-2 text-sm text-white transition-colors hover:bg-red-700"
               onClick={handleConfirmDelete}
               type="button"
             >
-              Delete
+              删除
             </button>
           </DialogFooter>
         </DialogContent>

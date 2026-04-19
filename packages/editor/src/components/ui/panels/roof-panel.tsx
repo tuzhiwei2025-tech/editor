@@ -141,10 +141,10 @@ export function RoofPanel() {
     <PanelWrapper
       icon="/icons/roof.png"
       onClose={handleClose}
-      title={node.name || 'Roof'}
+      title={node.name || '屋顶'}
       width={300}
     >
-      <PanelSection title="Segments">
+      <PanelSection title="屋面分段">
         <div className="flex flex-col gap-1">
           {segments.map((seg, i) => (
             <button
@@ -153,19 +153,19 @@ export function RoofPanel() {
               onClick={() => handleSelectSegment(seg.id)}
               type="button"
             >
-              <span className="truncate">{seg.name || `Segment ${i + 1}`}</span>
+              <span className="truncate">{seg.name || `分段 ${i + 1}`}</span>
               <span className="text-muted-foreground text-xs capitalize">{seg.roofType}</span>
             </button>
           ))}
         </div>
         <ActionButton
           icon={<Plus className="h-3.5 w-3.5" />}
-          label="Add Segment"
+          label="添加分段"
           onClick={handleAddSegment}
         />
       </PanelSection>
 
-      <PanelSection title="Position">
+      <PanelSection title="位置">
         <MetricControl
           label="X"
           max={50}
@@ -209,7 +209,7 @@ export function RoofPanel() {
           value={Math.round(node.position[2] * 100) / 100}
         />
         <SliderControl
-          label="Rotation"
+          label="旋转"
           max={180}
           min={-180}
           onChange={(degrees) => {
@@ -238,23 +238,23 @@ export function RoofPanel() {
         </div>
       </PanelSection>
 
-      <PanelSection title="Actions">
+      <PanelSection title="操作">
         <ActionGroup>
-          <ActionButton icon={<Move className="h-3.5 w-3.5" />} label="Move" onClick={handleMove} />
+          <ActionButton icon={<Move className="h-3.5 w-3.5" />} label="移动" onClick={handleMove} />
           <ActionButton
             icon={<Copy className="h-3.5 w-3.5" />}
-            label="Duplicate"
+            label="复制"
             onClick={handleDuplicate}
           />
           <ActionButton
             className="hover:bg-red-500/20"
             icon={<Trash2 className="h-3.5 w-3.5 text-red-400" />}
-            label="Delete"
+            label="删除"
             onClick={handleDelete}
           />
         </ActionGroup>
       </PanelSection>
-      <PanelSection title="Material">
+      <PanelSection title="材质">
         <MaterialPicker onChange={handleMaterialChange} value={node.material} />
       </PanelSection>
     </PanelWrapper>

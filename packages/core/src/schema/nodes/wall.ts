@@ -2,7 +2,6 @@ import dedent from 'dedent'
 import { z } from 'zod'
 import { BaseNode, nodeType, objectId } from '../base'
 import { MaterialSchema } from '../material'
-import { ItemNode } from './item'
 // import { DoorNode } from "./door";
 // import { ItemNode } from "./item";
 // import { WindowNode } from "./window";
@@ -10,7 +9,8 @@ import { ItemNode } from './item'
 export const WallNode = BaseNode.extend({
   id: objectId('wall'),
   type: nodeType('wall'),
-  children: z.array(ItemNode.shape.id).default([]),
+  /** 门、窗、墙挂物品等子节点 id（不限于 item 前缀） */
+  children: z.array(z.string()).default([]),
   material: MaterialSchema.optional(),
   thickness: z.number().optional(),
   height: z.number().optional(),

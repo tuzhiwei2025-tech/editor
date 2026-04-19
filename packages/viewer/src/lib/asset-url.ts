@@ -1,6 +1,22 @@
 import { loadAssetUrl } from '@pascal-app/core'
 
-export const ASSETS_CDN_URL = process.env.NEXT_PUBLIC_ASSETS_CDN_URL || 'https://editor.pascal.app'
+/**
+ * 物品等资源的基础 URL（不含末尾 `/`）。
+ * - 若设置了 `NEXT_PUBLIC_ASSETS_CDN_URL`（可为空字符串）：始终使用该值；空串表示同源相对路径（如 `/items/...`）。
+ * - 若未设置：开发环境默认 `''`，从当前站点 `public/` 加载本地模型；生产默认官方 CDN。
+ */
+function assetsCdnBase(): string {
+  const env = process.env.NEXT_PUBLIC_ASSETS_CDN_URL
+  if (env !== undefined) {
+    return env.replace(/\/$/, '')
+  }
+  if (process.env.NODE_ENV === 'development') {
+    return ''
+  }
+  return 'https://editor.pascal.app'
+}
+
+export const ASSETS_CDN_URL = assetsCdnBase()
 
 /**
  * Resolves an asset URL to the appropriate format:

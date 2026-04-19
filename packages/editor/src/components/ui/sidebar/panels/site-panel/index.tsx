@@ -139,7 +139,7 @@ function PropertyLineSection() {
 
         <div className="flex items-center gap-2">
           <Pentagon className="h-4 w-4 text-muted-foreground" />
-          <span className="font-medium text-sm">Property Line</span>
+          <span className="font-medium text-sm">用地红线</span>
         </div>
         <button
           className={cn(
@@ -246,7 +246,7 @@ function CameraPopover({
             buttonClassName,
           )}
           onClick={(e) => e.stopPropagation()}
-          title="Camera snapshot"
+          title="相机快照"
         >
           <Camera className="h-3.5 w-3.5" />
           {hasCamera && (
@@ -345,13 +345,13 @@ function ReferenceItem({
       <div className="flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 py-0 pl-[60px] text-muted-foreground group-hover/ref:text-foreground">
         {refNode.type === 'scan' ? (
           <img
-            alt="Scan"
+            alt="扫描"
             className="h-3.5 w-3.5 shrink-0 object-contain opacity-70 transition-opacity group-hover/ref:opacity-100"
             src="/icons/mesh.png"
           />
         ) : (
           <img
-            alt="Guide"
+            alt="参考图"
             className="h-3.5 w-3.5 shrink-0 object-contain opacity-70 transition-opacity group-hover/ref:opacity-100"
             src="/icons/floorplan.png"
           />
@@ -368,7 +368,7 @@ function ReferenceItem({
       <button
         className="z-20 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground opacity-0 transition-colors hover:bg-black/5 hover:text-foreground group-hover/ref:opacity-100 dark:hover:bg-white/10"
         onClick={(e) => handleDelete(refNode.id, e)}
-        title="Delete"
+        title="删除"
       >
         <Trash2 className="h-3 w-3" />
       </button>
@@ -649,7 +649,7 @@ function LevelItem({
 
         <div className="flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 py-0 pl-0.5 text-sm">
           <img
-            alt="Level"
+            alt="楼层"
             className={cn(
               'h-4 w-4 shrink-0 object-contain transition-all duration-200',
               !isSelected && 'opacity-60 grayscale',
@@ -675,7 +675,7 @@ function LevelItem({
                   : 'text-muted-foreground hover:bg-accent hover:text-foreground',
               )}
               onClick={(e) => e.stopPropagation()}
-              title="Camera snapshot"
+              title="相机快照"
             >
               <Camera className="h-3.5 w-3.5" />
               {level.camera && (
@@ -830,7 +830,7 @@ function LevelsSection({
           <div className="relative z-10 flex items-center pr-1 pl-[38px]">
             <Plus className="h-3.5 w-3.5" />
           </div>
-          <span className="truncate">Add level</span>
+          <span className="truncate">添加楼层</span>
         </button>
         {levels.length === 0 && (
           <div className="relative flex h-8 select-none items-center border-border/50 border-b py-0 pr-2 pl-[38px] text-muted-foreground text-xs">
@@ -875,7 +875,7 @@ function LayerToggle() {
           : 'none'
 
   return (
-    <div className="relative flex items-center gap-1 border-border/50 border-b bg-[#2C2C2E] p-1">
+    <div className="relative flex items-center gap-1 border-border/50 border-b bg-muted/90 p-1 backdrop-blur-md">
       <button
         className={cn(
           'relative flex flex-1 cursor-pointer flex-col items-center justify-center rounded-md py-2 font-medium text-[10px] transition-all duration-200',
@@ -890,14 +890,14 @@ function LayerToggle() {
       >
         {activeTab === 'structure' && (
           <motion.div
-            className="absolute inset-0 rounded-md bg-[#3e3e3e] shadow-sm ring-1 ring-border/50"
+            className="absolute inset-0 rounded-md bg-background/85 shadow-sm ring-1 ring-border/50"
             layoutId="layerToggleActiveBg"
             transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
           />
         )}
         <div className="relative z-10 flex flex-col items-center">
           <img
-            alt="Structure"
+            alt="结构"
             className={cn(
               'mb-1 h-6 w-6 transition-all',
               activeTab !== 'structure' && 'opacity-50 grayscale',
@@ -926,14 +926,14 @@ function LayerToggle() {
       >
         {activeTab === 'furnish' && (
           <motion.div
-            className="absolute inset-0 rounded-md bg-[#3e3e3e] shadow-sm ring-1 ring-border/50"
+            className="absolute inset-0 rounded-md bg-background/85 shadow-sm ring-1 ring-border/50"
             layoutId="layerToggleActiveBg"
             transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
           />
         )}
         <div className="relative z-10 flex flex-col items-center">
           <img
-            alt="Furnish"
+            alt="陈设"
             className={cn(
               'mb-1 h-6 w-6 transition-all',
               activeTab !== 'furnish' && 'opacity-50 grayscale',
@@ -963,14 +963,14 @@ function LayerToggle() {
       >
         {activeTab === 'zones' && (
           <motion.div
-            className="absolute inset-0 rounded-md bg-[#3e3e3e] shadow-sm ring-1 ring-border/50"
+            className="absolute inset-0 rounded-md bg-background/85 shadow-sm ring-1 ring-border/50"
             layoutId="layerToggleActiveBg"
             transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
           />
         )}
         <div className="relative z-10 flex flex-col items-center">
           <img
-            alt="Zones"
+            alt="分区"
             className={cn(
               'mb-1 h-6 w-6 transition-all',
               activeTab !== 'zones' && 'opacity-50 grayscale',
@@ -1086,7 +1086,7 @@ function ZoneItem({ zone, isLast }: { zone: ZoneNode; isLast?: boolean }) {
             <button
               className="relative flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground opacity-0 transition-colors hover:bg-black/5 hover:text-foreground group-hover/row:opacity-100 dark:hover:bg-white/10"
               onClick={(e) => e.stopPropagation()}
-              title="Camera snapshot"
+              title="相机快照"
             >
               <Camera className="h-3 w-3" />
               {zone.camera && (
@@ -1165,7 +1165,7 @@ function MultiSelectionBadge() {
         <button
           className="cursor-pointer rounded-full p-1.5 transition-colors hover:bg-primary-foreground/20"
           onClick={() => setSelection({ selectedIds: [] })}
-          title="Clear selection"
+          title="清除选择"
         >
           <X className="h-4 w-4" />
         </button>
@@ -1187,7 +1187,7 @@ function ContentSection() {
 
   if (!level) {
     return (
-      <div className="px-3 py-4 text-muted-foreground text-sm">Select a level to view content</div>
+      <div className="px-3 py-4 text-muted-foreground text-sm">请选择楼层以查看内容</div>
     )
   }
 
@@ -1235,7 +1235,7 @@ function ContentSection() {
   })
 
   if (elementChildren.length === 0) {
-    return <div className="px-3 py-4 text-muted-foreground text-sm">No elements on this level</div>
+    return <div className="px-3 py-4 text-muted-foreground text-sm">该楼层暂无元素</div>
   }
 
   return (
@@ -1314,7 +1314,7 @@ function BuildingItem({
       >
         <div className="flex h-full min-w-0 flex-1 cursor-pointer items-center gap-2 py-2 pl-3">
           <img
-            alt="Building"
+            alt="建筑"
             className={cn(
               'h-5 w-5 object-contain transition-all',
               !isBuildingActive && 'opacity-60 grayscale',
@@ -1336,7 +1336,7 @@ function BuildingItem({
                   : 'text-muted-foreground hover:bg-accent hover:text-foreground',
               )}
               onClick={(e) => e.stopPropagation()}
-              title="Camera snapshot"
+              title="相机快照"
             >
               <Camera className="h-4 w-4" />
               {building.camera && (
@@ -1467,7 +1467,7 @@ export function SitePanel({ projectId, onUploadAsset, onDeleteAsset }: SitePanel
           >
             <div className="flex items-center gap-2">
               <img
-                alt="Site"
+                alt="场地"
                 className={cn(
                   'h-5 w-5 object-contain transition-all',
                   phase !== 'site' && 'opacity-60 grayscale',

@@ -948,6 +948,32 @@ export const CATALOG_ITEMS: AssetInput[] = [
   },
 
   {
+    id: 'robot',
+    category: 'furniture',
+    tags: ['floor', 'character', 'decor'],
+    name: 'Robot',
+    thumbnail: '/items/robot/thumbnail.png',
+    src: '/items/robot/model.glb',
+    scale: [1, 1, 1],
+    offset: [0, 0, 0],
+    rotation: [0, 0, 0],
+    dimensions: [0.55, 1.75, 0.55],
+  },
+
+  {
+    id: 'gogo',
+    category: 'furniture',
+    tags: ['floor', 'character', 'decor'],
+    name: 'GoGo',
+    thumbnail: '/items/gogo/thumbnail.png',
+    src: '/items/gogo/model.glb',
+    scale: [1, 1, 1],
+    offset: [0, 0, 0],
+    rotation: [0, 0, 0],
+    dimensions: [0.55, 1.75, 0.55],
+  },
+
+  {
     id: 'car-toy',
     category: 'furniture',
     tags: ['floor', 'kids', 'decor'],
@@ -1262,7 +1288,7 @@ export const CATALOG_ITEMS: AssetInput[] = [
         },
         {
           kind: 'slider',
-          label: 'Intensity',
+          label: '强度',
           min: 0,
           max: 100,
           unit: '%',
@@ -1299,7 +1325,7 @@ export const CATALOG_ITEMS: AssetInput[] = [
         },
         {
           kind: 'slider',
-          label: 'Intensity',
+          label: '强度',
           min: 0,
           max: 100,
           unit: '%',
@@ -1336,7 +1362,7 @@ export const CATALOG_ITEMS: AssetInput[] = [
         },
         {
           kind: 'slider',
-          label: 'Intensity',
+          label: '强度',
           min: 0,
           max: 100,
           unit: '%',
