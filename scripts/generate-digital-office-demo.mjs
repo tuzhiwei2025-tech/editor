@@ -7,6 +7,13 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  deskEmployeePlaceholderSrcDoc,
+  factoryBoardSrcDoc,
+  meetingAgendaSrcDoc,
+  teaStationSrcDoc,
+  wallScreenSrcDoc,
+} from './embedded-screen-templates.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const out = join(__dirname, '../apps/editor/public/demos/demo_digital_office_factory.json')
@@ -223,77 +230,6 @@ function addItem(name, position, rotation, assetDef, opts = {}) {
   }
   items.push(A(node))
   return id
-}
-
-/** 与 item-html-preview 外层毛玻璃呼应：iframe 内强毛玻璃面板 */
-const GLASS_PANEL =
-  'backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);' +
-  'background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.28);border-radius:12px;' +
-  'box-shadow:0 8px 28px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.35)'
-
-/** 工位屏占位：全工位统一视觉；成员名由 3D 预览脚本写入 */
-function deskEmployeePlaceholderSrcDoc(slotIndex) {
-  const n = slotIndex + 1
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
-  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;
-  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;
-  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));
-  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}
-  .panel{padding:12px 14px;${GLASS_PANEL}}
-  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#0a84ff}
-  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}
-  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}
-  </style></head><body><div class="panel"><span class="tag">工位 ${n}</span>
-  <h1>待命</h1><p class="hint">从工作流页「在 3D 场景预览」运行后，将同步显示该工位绑定成员与工具。</p></div></body></html>`
-}
-
-function wallScreenSrcDoc() {
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
-  *{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;
-  background:linear-gradient(155deg,rgba(8,47,73,0.22),rgba(15,23,42,0.28) 50%,rgba(30,41,59,0.2));
-  backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-  color:#f0f9ff;font-family:system-ui,sans-serif}
-  .box{max-width:92%;text-align:center;padding:22px 30px;border-radius:16px;${GLASS_PANEL}}
-  h1{margin:0 0 10px;font-size:clamp(16px,2.5vw,22px);letter-spacing:0.02em}
-  p{margin:0;font-size:12px;opacity:0.9;line-height:1.55}
-  code{font-size:10px;background:rgba(15,23,42,0.35);padding:2px 6px;border-radius:4px;border:1px solid rgba(148,163,184,0.22)}
-  </style></head><body><div class="box"><h1>信息发布大屏 · HTML</h1><p><code>metadata.htmlPreview</code></p></div></body></html>`
-}
-
-function factoryBoardSrcDoc() {
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
-  body{margin:0;min-height:100vh;background:linear-gradient(170deg,rgba(41,37,36,0.7),rgba(28,25,23,0.85));
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  color:#fed7aa;font:11px system-ui;display:flex;align-items:center;justify-content:center;padding:14px}
-  .c{padding:14px 16px;border-radius:12px;max-width:90%;${GLASS_PANEL};border-color:rgba(251,146,60,0.4)}
-  h1{margin:0 0 6px;font-size:12px;color:#fdba74}
-  </style></head><body><div class="c"><h1>产线电子看板</h1><div>OEE · 节拍 · 异常</div></div></body></html>`
-}
-
-function meetingAgendaSrcDoc() {
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
-  body{margin:0;min-height:100vh;background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));
-  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
-  color:#f5f5f7;font:12px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;padding:12px;display:flex;align-items:stretch}
-  .panel{flex:1;padding:14px 16px;${GLASS_PANEL}}
-  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#bf5af2}
-  h1{margin:6px 0 8px;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}
-  li{margin:4px 0;color:#a1a1a6;line-height:1.4}
-  </style></head><body><div class="panel"><span class="tag">会议</span><h1>议程</h1><ul><li>季度 OKR</li><li>产线节拍复盘</li></ul></div></body></html>`
-}
-
-function teaStationSrcDoc() {
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
-  *{box-sizing:border-box}body{margin:0;font:11px -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:#f5f5f7;
-  min-height:100vh;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:stretch;
-  background:linear-gradient(165deg,rgba(29,29,31,0.92),rgba(10,10,12,0.96) 55%,rgba(22,22,24,0.94));
-  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}
-  .panel{padding:12px 14px;${GLASS_PANEL}}
-  .tag{font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#30d158}
-  h1{margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:-0.02em;color:#f5f5f7}
-  .hint{margin-top:8px;font-size:10px;line-height:1.45;color:#a1a1a6}
-  </style></head><body><div class="panel"><span class="tag">茶水区</span>
-  <h1>自助</h1><p class="hint">饮品、微波炉与杯具取用后请归位。</p></div></body></html>`
 }
 
 function deskBundle(tx, tz, chairToward = 'south', deskSlotIndex) {

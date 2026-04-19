@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  DEMO_OFFICE_JSON_PATH,
   Editor,
   loadSceneFromLocalStorage,
   parseTeamRuntimeScript,
@@ -20,7 +21,7 @@ async function loadInitialScene(): Promise<SceneGraph | null> {
   const saved = loadSceneFromLocalStorage()
   if (saved) return saved
   try {
-    const res = await fetch('/demos/demo_office.json')
+    const res = await fetch(DEMO_OFFICE_JSON_PATH)
     if (!res.ok) return null
     return (await res.json()) as SceneGraph
   } catch {

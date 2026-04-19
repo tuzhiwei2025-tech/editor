@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  type AnyNodeId,
-  type ItemNode,
-  sceneRegistry,
-  useScene,
-} from '@pascal-app/core'
+import { type AnyNodeId, type ItemNode, sceneRegistry, useScene } from '@pascal-app/core'
 import { Html } from '@react-three/drei'
 import { createPortal, useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useState } from 'react'
@@ -111,7 +106,10 @@ function getPreset(assetId: string, variant: 'desk' | 'wall'): ScreenPreset {
  * 屏幕中心在物品根 group 局部坐标中的位置（与 ItemRenderer 里 Clone 一致：
  * offset + R(asset) * (cloneScale ⊙ rel)）
  */
-function screenPositionWorldInItemRoot(node: ItemNode, rel: [number, number, number]): [number, number, number] {
+function screenPositionWorldInItemRoot(
+  node: ItemNode,
+  rel: [number, number, number],
+): [number, number, number] {
   const [sx, sy, sz] = cloneScale(node)
   const v = new Vector3(rel[0] * sx, rel[1] * sy, rel[2] * sz)
   const [rx, ry, rz] = node.asset.rotation
@@ -140,8 +138,7 @@ function computeLayout(node: ItemNode, meta: ItemHtmlPreviewMeta) {
   const s = scaleAverage(node)
   const sizeBase = meta.sizePx ?? preset.sizePx
   /** 墙挂：Html 已与 Clone 同 scale，不再放大像素框，避免画面大于玻璃 */
-  const sizeScale =
-    variant === 'wall' ? 1 : Math.min(1.2, 0.9 + 0.08 * s)
+  const sizeScale = variant === 'wall' ? 1 : Math.min(1.2, 0.9 + 0.08 * s)
   const width = Math.round(sizeBase[0] * sizeScale)
   const height = Math.round(sizeBase[1] * sizeScale)
   const distanceFactor = meta.distanceFactor ?? preset.distanceFactor
@@ -201,6 +198,7 @@ function ItemHtmlPreview({ nodeId }: { nodeId: AnyNodeId }) {
 
   const glassRadius = layout.variant === 'wall' ? 8 : 5
   const flipX = meta.flipContentX === true
+  const isWall = layout.variant === 'wall'
 
   return createPortal(
     <Html
@@ -220,13 +218,14 @@ function ItemHtmlPreview({ nodeId }: { nodeId: AnyNodeId }) {
           height: layout.height,
           borderRadius: glassRadius,
           overflow: 'hidden',
-          boxShadow:
-            '0 10px 36px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(255,255,255,0.06)',
-          border: layout.variant === 'wall' ? '1px solid rgba(255,255,255,0.42)' : '1px solid rgba(226,232,240,0.55)',
+          boxShadow: isWall
+            ? '0 10px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(255,255,255,0.12)'
+            : '0 12px 40px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.75), inset 0 -1px 0 rgba(255,255,255,0.2)',
+          border: isWall ? '1px solid rgba(255,255,255,0.5)' : '1px solid rgba(255,255,255,0.55)',
           isolation: 'isolate',
-          background: 'rgba(255, 255, 255, 0.04)',
-          backdropFilter: 'saturate(200%) blur(42px)',
-          WebkitBackdropFilter: 'saturate(200%) blur(42px)',
+          background: isWall ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
+          backdropFilter: 'saturate(200%) blur(48px)',
+          WebkitBackdropFilter: 'saturate(200%) blur(48px)',
         }}
       >
         <div

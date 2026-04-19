@@ -36,11 +36,7 @@ import {
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { deleteLevelWithFallbackSelection } from '../../../lib/level-selection'
-import {
-  applySceneGraphToEditor,
-  saveSceneToLocalStorage,
-  type SceneGraph,
-} from '../../../lib/scene'
+import { loadDigitalOfficeFactoryDemo } from '../../../lib/demo-scenes'
 import { useCommandRegistry } from '../../../store/use-command-registry'
 import type { StructureTool } from '../../../store/use-editor'
 import useEditor from '../../../store/use-editor'
@@ -145,14 +141,7 @@ export function EditorCommands() {
         ],
         execute: () =>
           runAsync(async () => {
-            const res = await fetch('/demos/demo_office.json')
-            if (!res.ok) {
-              console.error('[Editor] Failed to load demo scene', res.status)
-              return
-            }
-            const graph = (await res.json()) as SceneGraph
-            applySceneGraphToEditor(graph)
-            saveSceneToLocalStorage(graph)
+            await loadDigitalOfficeFactoryDemo()
           }),
       },
       {

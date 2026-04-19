@@ -3,17 +3,15 @@ import { loadAssetUrl } from '@pascal-app/core'
 /**
  * 物品等资源的基础 URL（不含末尾 `/`）。
  * - 若设置了 `NEXT_PUBLIC_ASSETS_CDN_URL`（可为空字符串）：始终使用该值；空串表示同源相对路径（如 `/items/...`）。
- * - 若未设置：开发环境默认 `''`，从当前站点 `public/` 加载本地模型；生产默认官方 CDN。
+ * - 若未设置：开发与生产均默认同源 `''`，由 Next `rewrites` 在服务端回源到官方物品库（见 apps/editor `next.config.ts`），避免在第三方域名（如 `*.vercel.app`）下浏览器直连 `editor.pascal.app` 触发跨域 `Failed to fetch`。
+ * - 若需客户端始终走绝对 CDN：设置 `NEXT_PUBLIC_ASSETS_CDN_URL=https://editor.pascal.app`（末尾可无 `/`）。
  */
 function assetsCdnBase(): string {
   const env = process.env.NEXT_PUBLIC_ASSETS_CDN_URL
   if (env !== undefined) {
     return env.replace(/\/$/, '')
   }
-  if (process.env.NODE_ENV === 'development') {
-    return ''
-  }
-  return 'https://editor.pascal.app'
+  return ''
 }
 
 export const ASSETS_CDN_URL = assetsCdnBase()

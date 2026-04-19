@@ -2,8 +2,9 @@
 
 import { Icon as IconifyIcon } from '@iconify/react'
 import { useViewer } from '@pascal-app/viewer'
-import { ChevronsLeft, ChevronsRight, Columns2, Eye, Footprints, Moon, Sun } from 'lucide-react'
-import { useCallback } from 'react'
+import { ChevronsLeft, ChevronsRight, Columns2, Eye, Factory, Footprints, Moon, Sun } from 'lucide-react'
+import { useCallback, useState } from 'react'
+import { loadDigitalOfficeFactoryDemo } from '../../lib/demo-scenes'
 import { cn } from '../../lib/utils'
 import useEditor from '../../store/use-editor'
 import type { ViewMode } from '../../store/use-editor'
@@ -314,6 +315,37 @@ function PreviewButton() {
   )
 }
 
+function LoadOfficeFactoryDemoButton() {
+  const [loading, setLoading] = useState(false)
+
+  const onClick = useCallback(() => {
+    if (loading) return
+    setLoading(true)
+    void loadDigitalOfficeFactoryDemo().finally(() => {
+      setLoading(false)
+    })
+  }, [loading])
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          className={cn(
+            'flex items-center gap-1.5 px-2.5 font-medium text-muted-foreground/80 text-xs transition-colors hover:bg-white/8 hover:text-foreground/90',
+            loading && 'pointer-events-none opacity-50',
+          )}
+          onClick={onClick}
+          type="button"
+        >
+          <Factory className="h-3.5 w-3.5 shrink-0" />
+          <span>演示场景</span>
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">加载演示：数字办公与流水线工厂</TooltipContent>
+    </Tooltip>
+  )
+}
+
 // ── Composed toolbar sections ───────────────────────────────────────────────
 
 export function ViewerToolbarLeft() {
@@ -336,6 +368,7 @@ export function ViewerToolbarRight() {
       <CameraModeToggle />
       <div className="my-1.5 w-px bg-border/50" />
       <WalkthroughButton />
+      <LoadOfficeFactoryDemoButton />
       <PreviewButton />
     </div>
   )
